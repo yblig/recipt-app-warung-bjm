@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warung BJM - Premium POS</title>
+    <style>
+        /* ================= TAMPILAN PREMIUM BALI UTAMA ================= */
+        body { 
+            font-family: 'Segoe UI', Roboto, sans-serif; 
+            text-align: center; 
+            background: #121212; 
+            color: #fff;
+            padding: 15px; 
+            margin: 0; 
+            min-height: 100vh;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+        
+        .bali-header {
+            background: linear-gradient(180deg, #d4af37 0%, #aa7c11 100%);
+            color: #111;
+            padding: 15px 10px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+        }
+        .bali-header h1 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: 1px; }
+        .bali-header p { margin: 3px 0 0 0; font-size: 12px; font-weight: bold; }
+
+        .menu-container { display: flex; flex-direction: column; gap: 10px; max-width: 480px; margin: 0 auto; }
+        
+        .btn-barang { 
+            font-size: 16px; 
+            padding: 16px; 
+            background: #1e1e1e;
+            color: white; 
+            border: 2px solid #d4af37; 
+            border-radius: 12px; 
+            font-weight: bold; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            cursor: pointer;
+        }
+        .badge-harga { background: #d4af37; color: #111; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; }
+
+        /* DAFTAR KERANJANG DI LAYAR HP MAMA */
+        .box-keranjang-layar {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 12px;
+            max-width: 450px;
+            margin: 20px auto 10px auto;
+            padding: 15px;
+            text-align: left;
+        }
+        .box-keranjang-layar h4 { margin: 0 0 10px 0; color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 5px; font-size: 16px; }
+        .item-keranjang-layar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px dashed #222;
+        }
+        .btn-hapus-item {
+            background: #c0392b;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background 0.2s;
+        }
+        .btn-hapus-item:active { background: #e74c3c; }
+
+        .box-total { 
+            background: #1a1a1a;
+            border: 2px dashed #d4af37;
+            padding: 15px; 
+            border-radius: 12px; 
+            max-width: 450px;
+            margin: 10px auto; 
+        }
+        .box-total h2 { margin: 0; font-size: 22px; }
+        #total-layar { color: #d4af37; font-weight: 900; }
+        
+        .btn-bayar { 
+            font-size: 20px; 
+            padding: 16px; 
+            max-width: 480px;
+            width: 100%;
+            margin-top: 10px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            color: #111; 
+            border: none; 
+            border-radius: 30px; 
+            font-weight: 900; 
+            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
+            cursor: pointer;
+        }
+
+        /* ================= MODAL INPUT NOMINAL PREMIUM ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            opacity: 0; pointer-events: none;
+            transition: 0.2s ease;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        
+        .modal-box {
+            background: #1e1e1e;
+            border: 3px solid #d4af37;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 360px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        .modal-box h3 { margin-top: 0; color: #d4af37; font-size: 18px; }
+        
+        .modal-display {
+            background: #000;
+            border: 1px solid #d4af37;
+            padding: 12px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #00f2fe;
+            text-align: right;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+
+        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
+        .key {
+            background: #2d2d2d;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .key:active { background: #d4af37; color: #111; }
+        .key-clear { background: #c0392b; }
+        
+        .modal-actions { display: flex; gap: 10px; }
+        .btn-modal { flex: 1; padding: 12px; font-weight: bold; border-radius: 8px; border: none; font-size: 16px; cursor: pointer; }
+        .btn-cancel { background: #7f8c8d; color: white; }
+        .btn-confirm { background: #27ae60; color: white; }
+
+        /* ================= PENGATURAN CETAK ANTI-GESER & ANTI-MOLOR ================= */
+        @media print { 
+            body * { visibility: hidden; } 
+            #struk, #struk * { visibility: visible; } 
+            #struk { 
+                position: absolute; 
+                left: 0; 
+                top: 0; 
+                width: 100%;
+                max-width: 45mm; /* Mengunci lebar area cetak printer thermal 58mm */
+                display: block !important; 
+                box-sizing: border-box;
+                margin: 0 auto;
+                padding: 2mm 3mm;
+            } 
+            @page { 
+                size: 58mm auto; /* Kunci kertas otomatis memotong pas teks habis */
+                margin: 0mm; /* Menghilangkan spasi kosong bawaan Chrome */
+            } 
+        }
+
+        #struk { 
+            display: none; 
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 13px; 
+            font-weight: 900; 
+            color: #000 !important;
+            text-align: left; 
+            background: white; 
+            line-height: 1.2;
+        }
+        .text-center { text-align: center; }
+        .item-row { display: flex; justify-content: space-between; margin: 4px 0; }
+        .bali-border { text-align: center; letter-spacing: 1px; font-size: 10px; margin: 3px 0; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="bali-header">
+        <h1>WARUNG BJM</h1>
+        <p>✨ Suksma, Angkul-Angkul Kuliner Bali ✨</p>
+    </div>
+    
+    <div class="menu-container">
+        <button class="btn-barang" onclick="bukaKeypad('Sate Babi K.asem', 2500)">
+            <span>🍢 Sate Babi Karangasem</span>
+            <span class="badge-harga">2.500</span>
+        </button>
+        <button class="btn-barang" onclick="bukaKeypad('Tum Babi', 3000)">
+            <span>🥩 Tum Babi Khas Bali</span>
+            <span class="badge-harga">3.000</span>
+        </button>
+        <button class="btn-barang" onclick="bukaKeypad('Pesan Tlengis', 2500)">
+            <span>🥥 Pesan Tlengis</span>
+            <span class="badge-harga">2.500</span>
+        </button>
+        <button class="btn-barang" onclick="bukaKeypad('Balah Babi', 30000)">
+            <span>🛍️ Balah Babi /Plastik</span>
+            <span class="badge-harga">30.000</span>
+        </button>
+        <button class="btn-barang" onclick="bukaKeypad('Paru (Kotak)', 50000)">
+            <span>🍱 Paru Spesial /Kotak</span>
+            <span class="badge-harga">50.000</span>
+        </button>
+    </div>
+    
+    <div class="box-keranjang-layar">
+        <h4>🛒 Daftar Pesanan Mama:</h4>
+        <div id="list-keranjang-layar">
+            <span style="color: #666; font-size: 13px;">Belum ada menu yang dipilih...</span>
+        </div>
+    </div>
+    
+    <div class="box-total">
+        <h2>TOTAL: <span id="total-layar">Rp 0</span></h2>
+    </div>
+    
+    <button class="btn-bayar" onclick="siapkanDanPrint()">🔥 BAYAR & PRINT</button>
+
+
+    <div class="modal-overlay" id="custom-modal">
+        <div class="modal-box">
+            <h3 id="modal-title">Jumlah Pesanan</h3>
+            <div class="modal-display" id="modal-val">1</div>
+            
+            <div class="keypad">
+                <button class="key" onclick="pressKey(1)">1</button>
+                <button class="key" onclick="pressKey(2)">2</button>
+                <button class="key" onclick="pressKey(3)">3</button>
+                <button class="key" onclick="pressKey(4)">4</button>
+                <button class="key" onclick="pressKey(5)">5</button>
+                <button class="key" onclick="pressKey(6)">6</button>
+                <button class="key" onclick="pressKey(7)">7</button>
+                <button class="key" onclick="pressKey(8)">8</button>
+                <button class="key" onclick="pressKey(9)">9</button>
+                <button class="key key-clear" onclick="pressKey('C')">C</button>
+                <button class="key" onclick="pressKey(0)">0</button>
+                <button class="key" style="background:#d4af37; color:#111" onclick="pressKey('X')">×</button>
+            </div>
+            
+            <div class="modal-actions">
+                <button class="btn-modal btn-cancel" onclick="tutupModal()">Batal</button>
+                <button class="btn-modal btn-confirm" onclick="konfirmasiJumlah()">Oke</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="struk">
+        <div class="text-center">
+            <img src="{{ url_for('static', filename='Logo BJM.png') }}" alt="Logo Warung BJM" style="width: 80px; max-height: 80px; object-fit: contain; display: block; margin: 0 auto 5px auto; float: none;"><br>
+            <span style="font-size: 15px; font-weight: 900; display: block; margin-top: -10px;">🎪 WARUNG BJM 🎪</span>
+            <span style="font-size: 10px; display: block;">Suksma, Bali</span>
+            <div class="bali-border">❖-❖-❖-❖-❖-❖-❖-❖-❖</div>
+        </div>
+        
+        <div id="struk-list-barang"></div>
+        
+        <div class="bali-border">❖-❖-❖-❖-❖-❖-❖-❖-❖</div>
+        <div class="item-row" style="font-size: 14px;">
+            <span>TOTAL NYA:</span>
+            <span id="struk-total-harga">Rp 0</span>
+        </div>
+        <div class="bali-border">❖-❖-❖-❖-❖-❖-❖-❖-❖</div>
+        <div class="text-center" style="margin-top: 8px; font-size: 11px; line-height: 1.2;">
+            Matur Suksma!<br>
+            Semoga Hari Anda Menyenangkan!<br>
+        </div>
+    </div>
+
+
+    <script>
+        let keranjang = [];
+        let totalHarga = 0;
+        let produkAktif = null;
+        let hargaAktif = 0;
+
+        function bukaKeypad(nama, harga) {
+            produkAktif = nama;
+            hargaAktif = harga;
+            document.getElementById('modal-title').innerText = `Jumlah "${nama}"`;
+            document.getElementById('modal-val').innerText = '1';
+            document.getElementById('custom-modal').classList.add('active');
+        }
+
+        function pressKey(key) {
+            let display = document.getElementById('modal-val');
+            let cur = display.innerText;
+            
+            if (key === 'C') {
+                display.innerText = '0';
+            } else if (key === 'X') {
+                if (cur.length > 1) display.innerText = cur.slice(0, -1);
+                else display.innerText = '0';
+            } else {
+                if (cur === '0' || cur === '1' && cur.length === 1) display.innerText = key;
+                else if (cur.length < 4) display.innerText = cur + key;
+            }
+        }
+
+        function tutupModal() {
+            document.getElementById('custom-modal').classList.remove('active');
+        }
+
+        function konfirmasiJumlah() {
+            let qty = parseInt(document.getElementById('modal-val').innerText);
+            if (isNaN(qty) || qty <= 0) qty = 1;
+            
+            let item = keranjang.find(i => i.nama === produkAktif);
+            if (item) {
+                item.qty += qty;
+            } else {
+                keranjang.push({ nama: produkAktif, harga: hargaAktif, qty: qty });
+            }
+            
+            hitungUlangTotal();
+            tutupModal();
+        }
+
+        // REFRESH TAMPILAN LIST KERANJANG DI LAYAR HP
+        function hitungUlangTotal() {
+            totalHarga = 0;
+            let layarKeranjang = document.getElementById('list-keranjang-layar');
+            
+            if(keranjang.length === 0) {
+                layarKeranjang.innerHTML = `<span style="color: #666; font-size: 13px;">Belum ada menu yang dipilih...</span>`;
+                document.getElementById('total-layar').innerText = 'Rp 0';
+                return;
+            }
+
+            layarKeranjang.innerHTML = '';
+            keranjang.forEach((item, index) => {
+                let subtotal = item.harga * item.qty;
+                totalHarga += subtotal;
+                
+                layarKeranjang.innerHTML += `
+                    <div class="item-row item-keranjang-layar">
+                        <span>🍢 <b>${item.nama}</b> (${item.qty} Porsi)</span>
+                        <div>
+                            <span style="color:#d4af37; margin-right:10px;">Rp ${subtotal.toLocaleString('id-ID')}</span>
+                            <button class="btn-hapus-item" onclick="hapusPesanan(${index})">❌ Hapus</button>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('total-layar').innerText = 'Rp ' + totalHarga.toLocaleString('id-ID');
+        }
+
+        // FUNGSI UNTUK MENGHAPUS PESANAN YANG SALAH CLICK
+        function hapusPesanan(index) {
+            keranjang.splice(index, 1);
+            hitungUlangTotal();
+        }
+
+        function siapkanDanPrint() {
+            if (keranjang.length === 0) {
+                alert('Keranjang masih kosong, Gilby!');
+                return;
+            }
+
+            let listDiv = document.getElementById('struk-list-barang');
+            listDiv.innerHTML = ''; 
+            
+            keranjang.forEach(item => {
+                let subtotal = item.harga * item.qty;
+                listDiv.innerHTML += `
+                    <div class="item-row">
+                        <span>${item.nama}</span>
+                        <span>${item.qty}x</span>
+                    </div>
+                    <div class="item-row" style="padding-left: 10px; font-size: 11px; font-weight: normal;">
+                        <span>@ ${item.harga.toLocaleString('id-ID')}</span>
+                        <span>Rp ${subtotal.toLocaleString('id-ID')}</span>
+                    </div>
+                `;
+            });
+
+            document.getElementById('struk-total-harga').innerText = 'Rp ' + totalHarga.toLocaleString('id-ID');
+
+            // Buka dialog print printer thermal
+            window.print();
+
+            // Reset kasir otomatis setelah di-print
+            keranjang = [];
+            hitungUlangTotal();
+        }
+    </script>
+</body>
+</html>
