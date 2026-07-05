@@ -375,35 +375,45 @@
             hitungUlangTotal();
         }
 
+        // MODIFIKASI SAKTI LANGSUNG NEMBAK KE RAWBT BLUETOOTH
         function siapkanDanPrint() {
             if (keranjang.length === 0) {
                 alert('Keranjang masih kosong, Gilby!');
                 return;
             }
 
-            let listDiv = document.getElementById('struk-list-barang');
-            listDiv.innerHTML = ''; 
+            // 1. Desain susunan teks polos untuk dikirim ke printer bluetooth thermal 58mm
+            let teksStruk = "";
+            teksStruk += "          WARUNG BJM          \n";
+            teksStruk += "    Suksma, Kuliner Khas Bali   \n";
+            teksStruk += "================================\n";
+            teksStruk += `Tgl: ${new Date().toLocaleDateString('id-ID')} ${new Date().toLocaleTimeString('id-ID')}\n`;
+            teksStruk += "--------------------------------\n";
             
             keranjang.forEach(item => {
                 let subtotal = item.harga * item.qty;
-                listDiv.innerHTML += `
-                    <div class="item-row">
-                        <span>${item.nama}</span>
-                        <span>${item.qty}x</span>
-                    </div>
-                    <div class="item-row" style="padding-left: 10px; font-size: 11px; font-weight: normal;">
-                        <span>@ ${item.harga.toLocaleString('id-ID')}</span>
-                        <span>Rp ${subtotal.toLocaleString('id-ID')}</span>
-                    </div>
-                `;
+                // Format baris menu utama
+                teksStruk += `${item.nama}\n`;
+                // Format baris rincian harga kanan-kiri (diatur jarak spasinya)
+                let rincianKiri = `  ${item.qty}x @${item.harga.toLocaleString('id-ID')}`;
+                let rincianKanan = `Rp ${subtotal.toLocaleString('id-ID')}`;
+                let sisaSpasi = 32 - (rincianKiri.length + rincianKanan.length);
+                if (sisaSpasi < 1) sisaSpasi = 1;
+                teksStruk += rincianKiri + " ".repeat(sisaSpasi) + rincianKanan + "\n";
             });
 
-            document.getElementById('struk-total-harga').innerText = 'Rp ' + totalHarga.toLocaleString('id-ID');
+            teksStruk += "--------------------------------\n";
+            let totalTeks = `TOTAL NYA: Rp ${totalHarga.toLocaleString('id-ID')}`;
+            teksStruk += " ".repeat(32 - totalTeks.length) + totalTeks + "\n";
+            teksStruk += "================================\n";
+            teksStruk += "          Matur Suksma!         \n";
+            teksStruk += "    Semoga Hari Anda Cerah!     \n";
+            teksStruk += "\n\n\n"; // Jarak kosong biar kertas bisa disobek rapi
 
-            // Buka dialog print printer thermal
-            window.print();
+            // 2. Kirim instan menggunakan URL Scheme ke aplikasi RawBT Android
+            window.location.href = "rawbt://send?text=" + encodeURIComponent(teksStruk);
 
-            // Reset kasir otomatis setelah di-print
+            // 3. Reset kasir otomatis setelah di-print
             keranjang = [];
             hitungUlangTotal();
         }
