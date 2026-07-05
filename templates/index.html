@@ -23,30 +23,31 @@
             color: #111;
             padding: 15px 10px;
             border-radius: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+        .bali-header-text { text-align: left; }
         .bali-header h1 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: 1px; }
         .bali-header p { margin: 3px 0 0 0; font-size: 12px; font-weight: bold; }
-
-        /* TOMBOL KONEKSI BLUETOOTH */
-        .btn-bluetooth {
-            background: #2980b9;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-weight: bold;
-            border-radius: 8px;
-            margin-bottom: 15px;
+        
+        /* TOMBOL MENU PENGATURAN */
+        .btn-setting-buka {
+            background: #222;
+            color: #d4af37;
+            border: 2px solid #d4af37;
+            padding: 10px;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 14px;
-            width: 100%;
-            max-width: 480px;
-            box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3);
-        }
-        .btn-bluetooth.connected {
-            background: #27ae60;
-            box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3);
+            font-size: 18px;
+            font-weight: bold;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .menu-container { display: flex; flex-direction: column; gap: 10px; max-width: 480px; margin: 0 auto; }
@@ -87,11 +88,7 @@
             border-bottom: 1px dashed #333;
         }
         
-        .qty-control {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+        .qty-control { display: flex; align-items: center; gap: 5px; }
         .btn-qty {
             background: #d4af37;
             color: #111;
@@ -152,41 +149,53 @@
             cursor: pointer;
         }
 
+        /* ================= MODAL HALAMAN PENGATURAN SUPER PREMIUM ================= */
+        .panel-setting {
+            position: fixed;
+            top: 0; bottom: 0; left: 0; right: 0;
+            background: #121212;
+            z-index: 10000;
+            padding: 20px;
+            overflow-y: auto;
+            display: none;
+            text-align: left;
+        }
+        .panel-setting.active { display: block; }
+        .setting-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px; margin-bottom: 20px; }
+        .setting-header h2 { margin: 0; color: #d4af37; }
+        .btn-close-setting { background: #c0392b; color: white; border: none; padding: 8px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        
+        .btn-bluetooth {
+            background: #2980b9; color: white; border: none; padding: 14px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 15px; width: 100%; box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3); margin-bottom: 25px;
+        }
+        .btn-bluetooth.connected { background: #27ae60; box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); }
+
+        .form-tambah-menu { background: #1e1e1e; border: 1px solid #333; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+        .form-tambah-menu h4 { margin: 0 0 10px 0; color: #d4af37; }
+        .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+        .form-group label { font-size: 13px; color: #aaa; }
+        .form-input { background: #000; border: 1px solid #d4af37; padding: 10px; border-radius: 6px; color: white; font-size: 14px; }
+        .btn-simpan-menu { background: #27ae60; color: white; border: none; padding: 10px; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 14px; }
+
+        .crud-item-row { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #d4af37; }
+        .crud-item-info { display: flex; flex-direction: column; }
+        .crud-item-nama { font-weight: bold; }
+        .crud-item-harga { font-size: 12px; color: #d4af37; margin-top: 2px; }
+
         #struk { display: none; }
     </style>
 </head>
 <body>
 
     <div class="bali-header">
-        <h1>WARUNG BJM</h1>
-        <p>✨ Suksma, Angkul-Angkul Kuliner Bali ✨</p>
+        <div class="bali-header-text">
+            <h1>WARUNG BJM</h1>
+            <p>✨ Badung Jaya Mesari ✨</p>
+        </div>
+        <button class="btn-setting-buka" onclick="bukaPanelSetting()">⚙️</button>
     </div>
-
-    <!-- Tombol Bluetooth Baru Mandiri Tanpa Jembatan -->
-    <button id="btn-connect" class="btn-bluetooth" onclick="hubungkanPrinterDirect()">🔌 HUBUNKAN PRINTER (RPPO2N)</button>
     
-    <div class="menu-container">
-        <button class="btn-barang" onclick="tambahKeKeranjang('Sate Babi K.asem', 2500)">
-            <span>🍢 Sate Babi Karangasem</span>
-            <span class="badge-harga">2.500</span>
-        </button>
-        <button class="btn-barang" onclick="tambahKeKeranjang('Tum Babi', 3000)">
-            <span>🥩 Tum Babi Khas Bali</span>
-            <span class="badge-harga">3.000</span>
-        </button>
-        <button class="btn-barang" onclick="tambahKeKeranjang('Pesan Tlengis', 2500)">
-            <span>🥥 Pesan Tlengis</span>
-            <span class="badge-harga">2.500</span>
-        </button>
-        <button class="btn-barang" onclick="tambahKeKeranjang('Balah Babi', 30000)">
-            <span>🛍️ Balah Babi /Plastik</span>
-            <span class="badge-harga">30.000</span>
-        </button>
-        <button class="btn-barang" onclick="tambahKeKeranjang('Paru (Kotak)', 50000)">
-            <span>🍱 Paru Spesial /Kotak</span>
-            <span class="badge-harga">50.000</span>
-        </button>
-    </div>
+    <div class="menu-container" id="wadah-menu-utama"></div>
     
     <div class="box-keranjang-layar">
         <h4>🛒 Daftar Pesanan Mama:</h4>
@@ -201,18 +210,135 @@
     
     <button class="btn-bayar" onclick="siapkanDanPrint()">🔥 BAYAR & PRINT</button>
 
+
+    <div class="panel-setting" id="panel-setting-admin">
+        <div class="setting-header">
+            <h2>⚙️ Pengaturan Kasir BJM</h2>
+            <button class="btn-close-setting" onclick="tutupPanelSetting()">❌ Tutup</button>
+        </div>
+
+        <h3>🔌 Hubungkan Printer Thermal</h3>
+        <button id="btn-connect" class="btn-bluetooth" onclick="hubungkanPrinterDirect()">🔌 KONEKSI BLUETOOTH (RPPO2N)</button>
+
+        <hr style="border: 1px solid #333; margin: 20px 0;">
+
+        <h3>🍱 Kelola Daftar Menu Jualan</h3>
+        <div class="form-tambah-menu">
+            <h4>➕ Tambah Menu Baru</h4>
+            <div class="form-group">
+                <label>Nama Menu (Contoh: Es Teh Manis)</label>
+                <input type="text" id="input-nama-menu" class="form-input" placeholder="Ketik nama makanan/minuman...">
+            </div>
+            <div class="form-group">
+                <label>Harga Jual (Angka Saja, Contoh: 5000)</label>
+                <input type="number" id="input-harga-menu" class="form-input" placeholder="Contoh: 5000">
+            </div>
+            <button class="btn-simpan-menu" onclick="simpanMenuBaru()">💾 Masukkan ke Aplikasi</button>
+        </div>
+
+        <h4>📋 Daftar Menu Saat Ini (Klik ❌ untuk Hapus):</h4>
+        <div id="crud-list-menu"></div>
+    </div>
+
+
     <script>
+        // Menu default bawaan warung saat pertama kali aplikasi dibuka
+        const menuAwal = [
+            { nama: 'Sate Babi K.asem', harga: 2500 },
+            { nama: 'Tum Babi', harga: 3000 },
+            { nama: 'Pesan Tlengis', harga: 2500 },
+            { nama: 'Balah Babi', harga: 30000 },
+            { nama: 'Paru (Kotak)', harga: 50000 }
+        ];
+
+        let databaseMenu = [];
         let keranjang = [];
         let totalHarga = 0;
-        
-        // Variabel Penyimpan Koneksi Hardware Bluetooth Printer
         let printerCharacteristic = null;
 
-        // FUNGSI UTAMA MENGHUBUNGKAN PRINTER LANGSUNG DARI WEB CHROME/SAFARI
+        // FUNGSI LOAD DATA MENU DARI LOCALSTORAGE BIAR GAK HILANG PAS REFRESH
+        function muatDataMenuAplikasi() {
+            let dataLokal = localStorage.getItem('BJM_MENU_DATA');
+            if (dataLokal) {
+                databaseMenu = JSON.parse(dataLokal);
+            } else {
+                databaseMenu = [...menuAwal];
+                localStorage.setItem('BJM_MENU_DATA', JSON.stringify(databaseMenu));
+            }
+            renderMenuUtama();
+            renderCrudListMenuSetting();
+        }
+
+        // TAMPILKAN MENU DI HALAMAN DEPAN UNTUK MAMA KLIK
+        function renderMenuUtama() {
+            let wadah = document.getElementById('wadah-menu-utama');
+            wadah.innerHTML = '';
+            databaseMenu.forEach(item => {
+                wadah.innerHTML += `
+                    <button class="btn-barang" onclick="tambahKeKeranjang('${item.nama}', ${item.harga})">
+                        <span>🍢 ${item.nama}</span>
+                        <span class="badge-harga">${item.harga.toLocaleString('id-ID')}</span>
+                    </button>
+                `;
+            });
+        }
+
+        // TAMPILKAN LIST DI HALAMAN PENGATURAN BUAT DIHAPUS-HAPUS
+        function renderCrudListMenuSetting() {
+            let wadah = document.getElementById('crud-list-menu');
+            wadah.innerHTML = '';
+            databaseMenu.forEach((item, index) => {
+                wadah.innerHTML += `
+                    <div class="crud-item-row">
+                        <div class="crud-item-info">
+                            <span class="crud-item-nama">${item.nama}</span>
+                            <span class="crud-item-harga">Rp ${item.harga.toLocaleString('id-ID')}</span>
+                        </div>
+                        <button class="btn-hapus-item" onclick="hapusMenuDariAplikasi(${index})">❌ Hapus</button>
+                    </div>
+                `;
+            });
+        }
+
+        // FUNGSI TAMBAH MENU BARU
+        function simpanMenuBaru() {
+            let nama = document.getElementById('input-nama-menu').value.trim();
+            let harga = parseInt(document.getElementById('input-harga-menu').value);
+
+            if (!nama || isNaN(harga) || harga <= 0) {
+                alert("Isi nama menu dan harga yang bener ya, Gilby!");
+                return;
+            }
+
+            databaseMenu.push({ nama: nama, harga: harga });
+            localStorage.setItem('BJM_MENU_DATA', JSON.stringify(databaseMenu));
+            
+            // Reset input form
+            document.getElementById('input-nama-menu').value = '';
+            document.getElementById('input-harga-menu').value = '';
+            
+            // Refresh semua layar
+            muatDataMenuAplikasi();
+            alert(`Mantap! Menu "${nama}" sukses terdaftar di aplikasi.`);
+        }
+
+        // FUNGSI HAPUS MENU JUALAN
+        function hapusMenuDariAplikasi(index) {
+            let konfirmasi = confirm(`Gilby yakin mau menghapus menu "${databaseMenu[index].nama}"?`);
+            if (konfirmasi) {
+                databaseMenu.splice(index, 1);
+                localStorage.setItem('BJM_MENU_DATA', JSON.stringify(databaseMenu));
+                muatDataMenuAplikasi();
+            }
+        }
+
+        // CONTROL NAVIGASI PANEL SETTING
+        function bukaPanelSetting() { document.getElementById('panel-setting-admin').classList.add('active'); }
+        function tutupPanelSetting() { document.getElementById('panel-setting-admin').classList.remove('active'); }
+
+        // ================= KONEKSI BLUETOOTH DIRECT RPPO2N =================
         async function hubungkanPrinterDirect() {
             try {
-                console.log('Mencari perangkat bluetooth...');
-                // Memfilter pencarian khusus untuk printer thermal RPPO2N
                 const device = await navigator.bluetooth.requestDevice({
                     filters: [{ name: 'RPPO2N' }],
                     optionalServices: ['00001101-0000-1000-8000-00805f9b34fb', '0000ff00-0000-1000-8000-00805f9b34fb'] 
@@ -221,31 +347,26 @@
                 const btn = document.getElementById('btn-connect');
                 btn.innerText = "⏳ Sedang Menyambungkan...";
 
-                // Menghubungkan ke server Bluetooth GATT perangkat
                 const server = await device.gatt.connect();
-                
-                // Mengambil Service bawaan printer thermal data transfer
                 const services = await server.getPrimaryServices();
                 let targetService = services[0]; 
                 
-                // Mengambil Jalur Pengiriman Data (Characteristic)
                 const characteristics = await targetService.getCharacteristics();
                 printerCharacteristic = characteristics.find(c => c.properties.write || c.properties.writeWithoutResponse);
 
                 if (printerCharacteristic) {
                     btn.innerText = "✅ PRINTER RPPO2N TERSAMBUNG!";
                     btn.className = "btn-bluetooth connected";
-                    alert("Keren Gilby! Printer RPPO2N beneran udah terkoneksi langsung via Bluetooth. Siap cetak!");
-                } else {
-                    throw new Error("Gagal menemukan jalur data printer.");
+                    alert("Printer RPPO2N Berhasil Tersambung Tanpa Jembatan! Suksma!");
                 }
             } catch (error) {
                 console.error(error);
                 document.getElementById('btn-connect').innerText = "❌ GAGAL KONEK, COBA LAGI";
-                alert("Gagal konek: " + error.message + "\n\nPastikan Bluetooth HP/iPad aktif dan kalau minta password ketik 0000.");
+                alert("Gagal terhubung: " + error.message + "\n\nPastikan printer nyala dan password-nya 0000.");
             }
         }
 
+        // ================= SISTEM KERANJANG BELANJA KASIR =================
         function tambahKeKeranjang(nama, harga) {
             let item = keranjang.find(i => i.nama === nama);
             if (item) {
@@ -311,7 +432,7 @@
             hitungUlangTotal();
         }
 
-        // SISTEM TEMBAK PRINT DIRECT VIA BLUETOOTH AIR
+        // ================= DIRECT CEK / PRINT BLUETOOTH =================
         async function siapkanDanPrint() {
             if (keranjang.length === 0) {
                 alert('Keranjang masih kosong, Gilby!');
@@ -319,11 +440,10 @@
             }
 
             if (!printerCharacteristic) {
-                alert('⚠️ Printer belum tersambung, Gilby! Silakan klik tombol "HUBUNKAN PRINTER" di atas dulu ya.');
+                alert('⚠️ Hubungkan Printer dulu di halaman Pengaturan (klik ikon ⚙️ di pojok kanan atas).');
                 return;
             }
 
-            // Membangun susunan teks struk belanjaan 32 karakter kertas thermal 58mm
             let teksStruk = "";
             teksStruk += "          WARUNG BJM          \n";
             teksStruk += "    Suksma, Kuliner Khas Bali   \n";
@@ -347,30 +467,26 @@
             teksStruk += "================================\n";
             teksStruk += "          Matur Suksma!         \n";
             teksStruk += "    Semoga Hari Anda Cerah!     \n";
-            teksStruk += "\n\n\n\n"; // Space potong kertas
+            teksStruk += "\n\n\n\n"; 
 
             try {
-                // Mengubah format string teks biasa menjadi biner ArrayBuffer agar dimengerti printer
                 const encoder = new TextEncoder();
                 const dataBiner = encoder.encode(teksStruk);
-                
-                // Proses pemotongan paket data biner agar pengiriman data bluetooth lancar (MTU chunking)
                 const ukuranMaksimalPaket = 20; 
                 for (let i = 0; i < dataBiner.length; i += ukuranMaksimalPaket) {
                     const paketKecil = dataBiner.slice(i, i + ukuranMaksimalPaket);
                     await printerCharacteristic.writeValue(paketKecil);
                 }
-                
-                console.log("Struk sukses terkirim ke RPPO2N!");
-                
-                // Reset kasir otomatis setelah sukses cetak
                 keranjang = [];
                 hitungUlangTotal();
             } catch (error) {
-                console.error("Gagal mengirim data print: ", error);
-                alert("Aduh, gagal kirim data ke printer bray! Coba klik Hubungkan Printer lagi.");
+                console.error(error);
+                alert("Gagal kirim data ke printer bray! Buka Pengaturan lalu sambungkan lagi.");
             }
         }
+
+        // JALANKAN PROSES DATABASE SAAT APLIKASI PERTAMA KALI DI-LOAD
+        window.onload = muatDataMenuAplikasi;
     </script>
 </body>
 </html>
