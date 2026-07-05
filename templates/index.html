@@ -42,7 +42,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 66px rgba(0,0,0,0.2);
             cursor: pointer;
         }
         .badge-harga { background: #d4af37; color: #111; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; }
@@ -58,13 +58,43 @@
             text-align: left;
         }
         .box-keranjang-layar h4 { margin: 0 0 10px 0; color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 5px; font-size: 16px; }
+        
         .item-keranjang-layar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px dashed #222;
+            padding: 12px 0;
+            border-bottom: 1px dashed #333;
         }
+        
+        /* PENGATURAN INPUT QUANTITY & TOMBOL */
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .btn-qty {
+            background: #d4af37;
+            color: #111;
+            border: none;
+            padding: 5px 10px;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .input-qty {
+            width: 45px;
+            text-align: center;
+            background: #000;
+            color: #00f2fe;
+            border: 1px solid #d4af37;
+            padding: 4px;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+
         .btn-hapus-item {
             background: #c0392b;
             color: white;
@@ -74,9 +104,8 @@
             font-weight: bold;
             cursor: pointer;
             font-size: 12px;
-            transition: background 0.2s;
+            margin-left: 5px;
         }
-        .btn-hapus-item:active { background: #e74c3c; }
 
         .box-total { 
             background: #1a1a1a;
@@ -104,83 +133,6 @@
             cursor: pointer;
         }
 
-        /* ================= MODAL INPUT NOMINAL PREMIUM ================= */
-        .modal-overlay {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.85);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 0; pointer-events: none;
-            transition: 0.2s ease;
-        }
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
-        
-        .modal-box {
-            background: #1e1e1e;
-            border: 3px solid #d4af37;
-            border-radius: 20px;
-            width: 90%;
-            max-width: 360px;
-            padding: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-        }
-        .modal-box h3 { margin-top: 0; color: #d4af37; font-size: 18px; }
-        
-        .modal-display {
-            background: #000;
-            border: 1px solid #d4af37;
-            padding: 12px;
-            font-size: 24px;
-            font-weight: bold;
-            color: #00f2fe;
-            text-align: right;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
-
-        .keypad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 15px; }
-        .key {
-            background: #2d2d2d;
-            color: white;
-            border: none;
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-        .key:active { background: #d4af37; color: #111; }
-        .key-clear { background: #c0392b; }
-        
-        .modal-actions { display: flex; gap: 10px; }
-        .btn-modal { flex: 1; padding: 12px; font-weight: bold; border-radius: 8px; border: none; font-size: 16px; cursor: pointer; }
-        .btn-cancel { background: #7f8c8d; color: white; }
-        .btn-confirm { background: #27ae60; color: white; }
-
-        /* ================= PENGATURAN CETAK ANTI-GESER & ANTI-MOLOR ================= */
-        @media print { 
-            body * { visibility: hidden; } 
-            #struk, #struk * { visibility: visible; } 
-            #struk { 
-                position: absolute; 
-                left: 0; 
-                top: 0; 
-                width: 100%;
-                max-width: 45mm; /* Mengunci lebar area cetak printer thermal 58mm */
-                display: block !important; 
-                box-sizing: border-box;
-                margin: 0 auto;
-                padding: 2mm 3mm;
-            } 
-            @page { 
-                size: 58mm auto; /* Kunci kertas otomatis memotong pas teks habis */
-                margin: 0mm; /* Menghilangkan spasi kosong bawaan Chrome */
-            } 
-        }
-
         #struk { 
             display: none; 
             font-family: 'Courier New', Courier, monospace; 
@@ -204,23 +156,23 @@
     </div>
     
     <div class="menu-container">
-        <button class="btn-barang" onclick="bukaKeypad('Sate Babi K.asem', 2500)">
+        <button class="btn-barang" onclick="tambahKeKeranjang('Sate Babi K.asem', 2500)">
             <span>🍢 Sate Babi Karangasem</span>
             <span class="badge-harga">2.500</span>
         </button>
-        <button class="btn-barang" onclick="bukaKeypad('Tum Babi', 3000)">
+        <button class="btn-barang" onclick="tambahKeKeranjang('Tum Babi', 3000)">
             <span>🥩 Tum Babi Khas Bali</span>
             <span class="badge-harga">3.000</span>
         </button>
-        <button class="btn-barang" onclick="bukaKeypad('Pesan Tlengis', 2500)">
+        <button class="btn-barang" onclick="tambahKeKeranjang('Pesan Tlengis', 2500)">
             <span>🥥 Pesan Tlengis</span>
             <span class="badge-harga">2.500</span>
         </button>
-        <button class="btn-barang" onclick="bukaKeypad('Balah Babi', 30000)">
+        <button class="btn-barang" onclick="tambahKeKeranjang('Balah Babi', 30000)">
             <span>🛍️ Balah Babi /Plastik</span>
             <span class="badge-harga">30.000</span>
         </button>
-        <button class="btn-barang" onclick="bukaKeypad('Paru (Kotak)', 50000)">
+        <button class="btn-barang" onclick="tambahKeKeranjang('Paru (Kotak)', 50000)">
             <span>🍱 Paru Spesial /Kotak</span>
             <span class="badge-harga">50.000</span>
         </button>
@@ -238,35 +190,6 @@
     </div>
     
     <button class="btn-bayar" onclick="siapkanDanPrint()">🔥 BAYAR & PRINT</button>
-
-
-    <div class="modal-overlay" id="custom-modal">
-        <div class="modal-box">
-            <h3 id="modal-title">Jumlah Pesanan</h3>
-            <div class="modal-display" id="modal-val">1</div>
-            
-            <div class="keypad">
-                <button class="key" onclick="pressKey(1)">1</button>
-                <button class="key" onclick="pressKey(2)">2</button>
-                <button class="key" onclick="pressKey(3)">3</button>
-                <button class="key" onclick="pressKey(4)">4</button>
-                <button class="key" onclick="pressKey(5)">5</button>
-                <button class="key" onclick="pressKey(6)">6</button>
-                <button class="key" onclick="pressKey(7)">7</button>
-                <button class="key" onclick="pressKey(8)">8</button>
-                <button class="key" onclick="pressKey(9)">9</button>
-                <button class="key key-clear" onclick="pressKey('C')">C</button>
-                <button class="key" onclick="pressKey(0)">0</button>
-                <button class="key" style="background:#d4af37; color:#111" onclick="pressKey('X')">×</button>
-            </div>
-            
-            <div class="modal-actions">
-                <button class="btn-modal btn-cancel" onclick="tutupModal()">Batal</button>
-                <button class="btn-modal btn-confirm" onclick="konfirmasiJumlah()">Oke</button>
-            </div>
-        </div>
-    </div>
-
 
     <div id="struk">
         <div class="text-center">
@@ -290,56 +213,41 @@
         </div>
     </div>
 
-
     <script>
         let keranjang = [];
         let totalHarga = 0;
-        let produkAktif = null;
-        let hargaAktif = 0;
 
-        function bukaKeypad(nama, harga) {
-            produkAktif = nama;
-            hargaAktif = harga;
-            document.getElementById('modal-title').innerText = `Jumlah "${nama}"`;
-            document.getElementById('modal-val').innerText = '1';
-            document.getElementById('custom-modal').classList.add('active');
-        }
-
-        function pressKey(key) {
-            let display = document.getElementById('modal-val');
-            let cur = display.innerText;
-            
-            if (key === 'C') {
-                display.innerText = '0';
-            } else if (key === 'X') {
-                if (cur.length > 1) display.innerText = cur.slice(0, -1);
-                else display.innerText = '0';
-            } else {
-                if (cur === '0' || cur === '1' && cur.length === 1) display.innerText = key;
-                else if (cur.length < 4) display.innerText = cur + key;
-            }
-        }
-
-        function tutupModal() {
-            document.getElementById('custom-modal').classList.remove('active');
-        }
-
-        function konfirmasiJumlah() {
-            let qty = parseInt(document.getElementById('modal-val').innerText);
-            if (isNaN(qty) || qty <= 0) qty = 1;
-            
-            let item = keranjang.find(i => i.nama === produkAktif);
+        // SEKARANG KLIK MENU LANGSUNG MASUK KERANJANG OTOMATIS (QTY: 1)
+        function tambahKeKeranjang(nama, harga) {
+            let item = keranjang.find(i => i.nama === nama);
             if (item) {
-                item.qty += qty;
+                item.qty += 1;
             } else {
-                keranjang.push({ nama: produkAktif, harga: hargaAktif, qty: qty });
+                keranjang.push({ nama: nama, harga: harga, qty: 1 });
             }
-            
             hitungUlangTotal();
-            tutupModal();
         }
 
-        // REFRESH TAMPILAN LIST KERANJANG DI LAYAR HP
+        // UNTUK MENGUBAH QUANTITY VIA TOMBOL + / - ATAU DIKETIK LANGSUNG
+        function ubahQty(index, aksiAtauValue) {
+            if (aksiAtauValue === '+') {
+                keranjang[index].qty += 1;
+            } else if (aksiAtauValue === '-') {
+                if (keranjang[index].qty > 1) {
+                    keranjang[index].qty -= 1;
+                }
+            } else {
+                let val = parseInt(aksiAtauValue);
+                if (!isNaN(val) && val > 0) {
+                    keranjang[index].qty = val;
+                } else {
+                    keranjang[index].qty = 1;
+                }
+            }
+            hitungUlangTotal();
+        }
+
+        // REFRESH TAMPILAN LIST KERANJANG DI LAYAR HP MAMA
         function hitungUlangTotal() {
             totalHarga = 0;
             let layarKeranjang = document.getElementById('list-keranjang-layar');
@@ -357,10 +265,13 @@
                 
                 layarKeranjang.innerHTML += `
                     <div class="item-row item-keranjang-layar">
-                        <span>🍢 <b>${item.nama}</b> (${item.qty} Porsi)</span>
-                        <div>
-                            <span style="color:#d4af37; margin-right:10px;">Rp ${subtotal.toLocaleString('id-ID')}</span>
-                            <button class="btn-hapus-item" onclick="hapusPesanan(${index})">❌ Hapus</button>
+                        <span>🍢 <b>${item.nama}</b></span>
+                        <div class="qty-control">
+                            <button class="btn-qty" onclick="ubahQty(${index}, '-')">-</button>
+                            <input type="number" class="input-qty" value="${item.qty}" onchange="ubahQty(${index}, this.value)" onclick="this.select()">
+                            <button class="btn-qty" onclick="ubahQty(${index}, '+')">+</button>
+                            <span style="color:#d4af37; margin: 0 5px 0 10px; font-weight:bold; min-width:70px; text-align:right;">Rp ${subtotal.toLocaleString('id-ID')}</span>
+                            <button class="btn-hapus-item" onclick="hapusPesanan(${index})">❌</button>
                         </div>
                     </div>
                 `;
@@ -369,20 +280,18 @@
             document.getElementById('total-layar').innerText = 'Rp ' + totalHarga.toLocaleString('id-ID');
         }
 
-        // FUNGSI UNTUK MENGHAPUS PESANAN YANG SALAH CLICK
         function hapusPesanan(index) {
             keranjang.splice(index, 1);
             hitungUlangTotal();
         }
 
-        // MODIFIKASI SAKTI LANGSUNG NEMBAK KE RAWBT BLUETOOTH
+        // SISTEM PRINT LANGSUNG JALAN KE RAWBT BLUETOOTH
         function siapkanDanPrint() {
             if (keranjang.length === 0) {
                 alert('Keranjang masih kosong, Gilby!');
                 return;
             }
 
-            // 1. Desain susunan teks polos untuk dikirim ke printer bluetooth thermal 58mm
             let teksStruk = "";
             teksStruk += "          WARUNG BJM          \n";
             teksStruk += "    Suksma, Kuliner Khas Bali   \n";
@@ -392,9 +301,7 @@
             
             keranjang.forEach(item => {
                 let subtotal = item.harga * item.qty;
-                // Format baris menu utama
                 teksStruk += `${item.nama}\n`;
-                // Format baris rincian harga kanan-kiri (diatur jarak spasinya)
                 let rincianKiri = `  ${item.qty}x @${item.harga.toLocaleString('id-ID')}`;
                 let rincianKanan = `Rp ${subtotal.toLocaleString('id-ID')}`;
                 let sisaSpasi = 32 - (rincianKiri.length + rincianKanan.length);
@@ -403,17 +310,16 @@
             });
 
             teksStruk += "--------------------------------\n";
-            let totalTeks = `TOTAL NYA: Rp ${totalHarga.toLocaleString('id-ID')}`;
-            teksStruk += " ".repeat(32 - totalTeks.length) + totalTeks + "\n";
+            let totalTeks = `TOTAL NYA: Rp ${totalHarga.toLocaleString('id-IDfixed')}`;
+            let totalClean = totalTeks.replace("fixed", "");
+            teksStruk += " ".repeat(32 - totalClean.length) + totalClean + "\n";
             teksStruk += "================================\n";
             teksStruk += "          Matur Suksma!         \n";
             teksStruk += "    Semoga Hari Anda Cerah!     \n";
-            teksStruk += "\n\n\n"; // Jarak kosong biar kertas bisa disobek rapi
+            teksStruk += "\n\n\n"; 
 
-            // 2. Kirim instan menggunakan URL Scheme ke aplikasi RawBT Android
             window.location.href = "rawbt://send?text=" + encodeURIComponent(teksStruk);
 
-            // 3. Reset kasir otomatis setelah di-print
             keranjang = [];
             hitungUlangTotal();
         }
