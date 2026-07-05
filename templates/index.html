@@ -105,12 +105,26 @@
         .crud-item-nama { font-weight: bold; }
         .crud-item-harga { font-size: 12px; color: #d4af37; margin-top: 2px; }
 
-        /* BOX REKAP */
+        /* BOX REKAP ADVANCED DENGAN DROPDOWN */
         .box-rekap { background: #1e1e1e; border: 1px solid #333; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
-        .rekap-row { display: flex; justify-content: space-between; align-items: center; background: #111; padding: 10px; border-radius: 6px; margin-bottom: 6px; }
-        .rekap-aksi { display: flex; gap: 5px; }
-        .btn-copas-rekap { background: #d4af37; color: #111; border: none; padding: 6px 12px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px; }
-        .btn-hapus-rekap { background: #c0392b; color: white; border: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px; }
+        .rekap-tanggal-item { background: #111; border: 1px solid #333; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+        .rekap-header-click { padding: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
+        .rekap-header-click:hover { background: #1a1a1a; }
+        .rekap-info-utama b { color: #d4af37; font-size: 14px; }
+        .rekap-panah { color: #d4af37; font-weight: bold; font-size: 14px; transition: transform 0.2s; }
+        
+        .rekap-dropdown-detail { display: none; padding: 10px; background: #161616; border-top: 1px dashed #333; }
+        .rekap-dropdown-detail.active { display: block; }
+        
+        .struk-item-row { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; border-left: 3px solid #00f2fe; }
+        .struk-info { font-size: 13px; color: #eee; text-align: left; }
+        .struk-jam { font-size: 11px; color: #888; display: block; margin-bottom: 2px; }
+        .struk-items-list { font-size: 11px; color: #aaa; margin: 0; padding-left: 14px; }
+        
+        .rekap-tombol-bawah-grup { display: flex; gap: 10px; margin-top: 10px; border-top: 1px solid #333; padding-top: 10px; }
+        .btn-copas-rekap { background: #d4af37; color: #111; border: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; flex: 1; }
+        .btn-hapus-rekap-total { background: #c0392b; color: white; border: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; }
+        .btn-hapus-struk-tunggal { background: #e74c3c; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; }
     </style>
 </head>
 <body>
@@ -158,7 +172,7 @@
         </div>
 
         <!-- REKAP PEMASUKAN HARIAN MAMA -->
-        <h3>📊 Rekap Pemasukan Harian Mama</h3>
+        <h3>📊 Rekap Pemasukan & Detail Struk</h3>
         <div class="box-rekap">
             <div id="list-pemasukan-harian">
                 <span style="color: #666; font-size: 13px;">Belum ada data pemasukan tercatat...</span>
@@ -170,7 +184,6 @@
         <!-- PENGATURAN BLUETOOTH PRINTER & TES STRUK -->
         <h3>🔌 Hubungkan Printer Thermal</h3>
         <button id="btn-connect" class="btn-bluetooth" onclick="hubungkanPrinterDirect()">🔌 KONEKSI BLUETOOTH (RPPO2N)</button>
-        <!-- TOMBOL BARU: TES PRINT -->
         <button id="btn-test-print" class="btn-test-print" onclick="jalankanTesStruk()">📝 TES PRINT STRUK</button>
 
         <hr style="border: 1px solid #333; margin: 20px 0;">
@@ -289,29 +302,72 @@
             }
         }
 
-        // CATAT REKAP HARIAN
-        function catatPemasukanHarian(nominal) {
+        // CATAT REKAP STRUK DETAIL
+        function catatPemasukanHarian(nominal, listKeranjangItem) {
             if (nominal <= 0) return;
             let hariIni = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+            let jamSekarang = new Date().toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
             
-            let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN');
+            let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN_V2');
             let rekapPemasukan = dataRekapLokal ? JSON.parse(dataRekapLokal) : {};
 
-            if (rekapPemasukan[hariIni]) {
-                rekapPemasukan[hariIni] += nominal;
-            } else {
-                rekapPemasukan[hariIni] = nominal;
+            // Migrasi dari data versi 1 lama (angka doang) ke versi baru (objek berstruktur)
+            let dataLamaV1 = localStorage.getItem('BJM_REKAP_PEMASUKAN');
+            if (dataLamaV1 && !dataRekapLokal) {
+                let rekapLama = JSON.parse(dataLamaV1);
+                Object.keys(rekapLama).forEach(tgl => {
+                    rekapPemasukan[tgl] = {
+                        total: rekapLama[tgl],
+                        struks: [{ jam: "00:00", nominal: rekapLama[tgl], rincian: "Data rekap bawaan sebelum update" }]
+                    };
+                });
+                localStorage.removeItem('BJM_REKAP_PEMASUKAN');
             }
 
-            localStorage.setItem('BJM_REKAP_PEMASUKAN', JSON.stringify(rekapPemasukan));
+            if (!rekapPemasukan[hariIni]) {
+                rekapPemasukan[hariIni] = { total: 0, struks: [] };
+            }
+
+            // Gabungkan rincian item jadi teks ringkas
+            let rincianTeks = listKeranjangItem.map(i => `${i.qty}x ${i.nama}`).join(', ');
+
+            rekapPemasukan[hariIni].struks.push({
+                id: Date.now(), // ID unik buat gampang hapus satuan
+                jam: jamSekarang,
+                nominal: nominal,
+                rincian: rincianTeks
+            });
+
+            // Hitung total akumulasi hari ini
+            rekapPemasukan[hariIni].total = rekapPemasukan[hariIni].struks.reduce((sum, item) => sum + item.nominal, 0);
+
+            localStorage.setItem('BJM_REKAP_PEMASUKAN_V2', JSON.stringify(rekapPemasukan));
             tampilkanRekapPemasukan();
         }
 
-        // TAMPILKAN REKAP HARIAN + TOMBOL HAPUS BARU
+        // TAMPILKAN REKAP HARIAN DENGAN DETAIL PANAH DROPDOWN
         function tampilkanRekapPemasukan() {
-            let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN');
-            let wadah = document.getElementById('list-pemasukan-harian');
+            let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN_V2');
             
+            // Cek jika data V2 belum ada tapi ada data V1 lama untuk dimigrasi langsung saat load
+            if (!dataRekapLokal) {
+                let dataLamaV1 = localStorage.getItem('BJM_REKAP_PEMASUKAN');
+                if (dataLamaV1) {
+                    let rekapPemasukan = {};
+                    let rekapLama = JSON.parse(dataLamaV1);
+                    Object.keys(rekapLama).forEach(tgl => {
+                        rekapPemasukan[tgl] = {
+                            total: rekapLama[tgl],
+                            struks: [{ id: Date.now(), jam: "Tadi Pagi", nominal: rekapLama[tgl], rincian: "Menu Terjual" }]
+                        };
+                    });
+                    localStorage.setItem('BJM_REKAP_PEMASUKAN_V2', JSON.stringify(rekapPemasukan));
+                    localStorage.removeItem('BJM_REKAP_PEMASUKAN');
+                    dataRekapLokal = JSON.stringify(rekapPemasukan);
+                }
+            }
+
+            let wadah = document.getElementById('list-pemasukan-harian');
             if (!dataRekapLokal || dataRekapLokal === '{}') {
                 wadah.innerHTML = '<span style="color: #666; font-size: 13px;">Belum ada data pemasukan tercatat...</span>';
                 return;
@@ -320,45 +376,118 @@
             let rekap = JSON.parse(dataRekapLokal);
             wadah.innerHTML = '';
             
-            Object.keys(rekap).reverse().forEach(tanggal => {
-                let totalDuit = rekap[tanggal];
-                let teksKlip = `Rekap Warung BJM\nTanggal: ${tanggal}\nTotal Pemasukan: Rp ${totalDuit.toLocaleString('id-ID')}`;
+            Object.keys(rekap).reverse().forEach((tanggal, idx) => {
+                let totalDuit = rekap[tanggal].total;
+                let listStruk = rekap[tanggal].struks || [];
                 
-                wadah.innerHTML += `
-                    <div class="rekap-row">
-                        <div>
-                            <b style="color:#d4af37; font-size:14px;">📅 ${tanggal}</b><br>
-                            <span style="font-size:13px; color:#00f2fe;">Total: Rp ${totalDuit.toLocaleString('id-ID')}</span>
+                // Siapkan teks copas gabungan untuk hari ini
+                let teksKlip = `Rekap Warung BJM\nTanggal: ${tanggal}\nTotal Pemasukan: Rp ${totalDuit.toLocaleString('id-ID')}\n\nRincian Transaksi:\n`;
+                listStruk.forEach(s => {
+                    teksKlip += `- [${s.jam}] Rp ${s.nominal.toLocaleString('id-ID')} (${s.rincian})\n`;
+                });
+
+                let strukRowsHtml = "";
+                listStruk.forEach((struk, sIdx) => {
+                    strukRowsHtml += `
+                        <div class="struk-item-row">
+                            <div class="struk-info">
+                                <span class="struk-jam">⏰ Jam ${struk.jam}</span>
+                                <b>Rp ${struk.nominal.toLocaleString('id-ID')}</b>
+                                <p class="struk-items-list">${struk.rincian}</p>
+                            </div>
+                            <button class="btn-hapus-struk-tunggal" onclick="hapusStrukTunggal('${tanggal}', ${sIdx})">❌ Hapus</button>
                         </div>
-                        <div class="rekap-aksi">
-                            <button class="btn-copas-rekap" onclick="copasTeksRekap('${btoa(teksKlip)}')">📋 Copas</button>
-                            <!-- BARU: TOMBOL HAPUS REKAP SALAH -->
-                            <button class="btn-hapus-rekap" onclick="hapusRekapHarian('${tanggal}')">❌</button>
+                    `;
+                });
+
+                if(listStruk.length === 0) {
+                    strukRowsHtml = `<span style="color:#777; font-size:12px; display:block; padding: 5px 0;">Tidak ada list transaksi aktif...</span>`;
+                }
+
+                wadah.innerHTML += `
+                    <div class="rekap-tanggal-item">
+                        <div class="rekap-header-click" onclick="toggleDropdownRekap(${idx})">
+                            <div class="rekap-info-utama">
+                                <b>📅 ${tanggal}</b><br>
+                                <span style="font-size:13px; color:#00f2fe; font-weight:bold;">Total: Rp ${totalDuit.toLocaleString('id-ID')}</span>
+                            </div>
+                            <span class="rekap-panah" id="panah-rekap-${idx}">▼</span>
+                        </div>
+                        
+                        <div class="rekap-dropdown-detail" id="drop-rekap-${idx}">
+                            <div style="max-height: 200px; overflow-y:auto; padding-right:5px;">
+                                ${strukRowsHtml}
+                            </div>
+                            <div class="rekap-tombol-bawah-grup">
+                                <button class="btn-copas-rekap" onclick="copasTeksRekap('${btoa(teksKlip)}')">📋 Copas Rekap</button>
+                                <button class="btn-hapus-rekap-total" onclick="hapusRekapHarianTotal('${tanggal}')">🗑️ Hapus Total Hari Ini</button>
+                            </div>
                         </div>
                     </div>
                 `;
             });
         }
 
+        // FUNGSI ANIMASI PANAH DROPDOWN
+        function toggleDropdownRekap(idx) {
+            let drop = document.getElementById(`drop-rekap-${idx}`);
+            let panah = document.getElementById(`panah-rekap-${idx}`);
+            if(drop.classList.contains('active')) {
+                drop.classList.remove('active');
+                panah.style.transform = "rotate(0deg)";
+            } else {
+                drop.classList.add('active');
+                panah.style.transform = "rotate(180deg)";
+            }
+        }
+
         function copasTeksRekap(base64Teks) {
             let teksAsli = atob(base64Teks);
             navigator.clipboard.writeText(teksAsli).then(() => {
-                alert("📋 Rekap harian sukses disalin ke memori HP Mama! Tinggal paste/tempel di WA Mama.");
+                alert("📋 Rekap harian & detail struk sukses disalin ke memori HP Mama!");
             }).catch(() => {
                 alert("Gagal menyalin otomatis bray!");
             });
         }
 
-        // BARU: FUNGSI HAPUS PEMASUKAN YANG SALAH
-        function hapusRekapHarian(tanggal) {
-            let yakin = confirm(`Ma, yakin mau menghapus catatan pemasukan untuk tanggal ${tanggal}? Data yang dihapus tidak bisa dikembalikan.`);
+        // 1. HAPUS STRUK TUNGGAL (YANG SALAH INPUT SAJA)
+        function hapusStrukTunggal(tanggal, sIdx) {
+            let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN_V2');
+            if (!dataRekapLokal) return;
+
+            let rekap = JSON.parse(dataRekapLokal);
+            let targetStruk = rekap[tanggal].struks[sIdx];
+
+            let yakin = confirm(`Ma, yakin mau menghapus satu transaksi senilai Rp ${targetStruk.nominal.toLocaleString('id-ID')} pada jam ${targetStruk.jam}?`);
             if (yakin) {
-                let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN');
-                if (dataRekapLokal) {
-                    let rekap = JSON.parse(dataRekapLokal);
-                    delete rekap[tanggal]; // Hapus data tanggal terpilih
-                    localStorage.setItem('BJM_REKAP_PEMASUKAN', JSON.stringify(rekap));
-                    tampilkanRekapPemasukan();
+                // Potong item terpilih
+                rekap[tanggal].struks.splice(sIdx, 1);
+                // Hitung ulang total harian setelah dikurangi struk tersebut
+                rekap[tanggal].total = rekap[tanggal].struks.reduce((sum, item) => sum + item.nominal, 0);
+
+                localStorage.setItem('BJM_REKAP_PEMASUKAN_V2', JSON.stringify(rekap));
+                tampilkanRekapPemasukan();
+            }
+        }
+
+        // 2. HAPUS KESELURUHAN HARI (MUNCUL POP UP VALIDASI KETAT)
+        function hapusRekapHarianTotal(tanggal) {
+            // Pop up 1: Mencegah ketidaksengajaan
+            let yakin1 = confirm(`⚠️ PERINGATAN KERAS! ⚠️\n\nMa, apakah Mama beneran yakin mau menghapus SELURUH data rekap pemasukan pada tanggal ${tanggal}?\nSemua list struk di hari ini akan hilang selamanya.`);
+            
+            if (yakin1) {
+                // Pop up 2: Mencegah salah pencet kedua kalinya
+                let yakin2 = confirm(`Konfirmasi Sekali Lagi:\nBenar-benar mau dikosongkan total untuk tanggal ${tanggal}? (Klik OK jika setuju)`);
+                
+                if (yakin2) {
+                    let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN_V2');
+                    if (dataRekapLokal) {
+                        let rekap = JSON.parse(dataRekapLokal);
+                        delete rekap[tanggal]; 
+                        localStorage.setItem('BJM_REKAP_PEMASUKAN_V2', JSON.stringify(rekap));
+                        tampilkanRekapPemasukan();
+                        alert(`Data rekap tanggal ${tanggal} sudah bersih total.`);
+                    }
                 }
             }
         }
@@ -405,7 +534,7 @@
             }
         }
 
-        // BARU: FUNGSI TES STRUK UNTUK MEMASTIKAN PRINTER AMAN
+        // TES STRUK UNTUK MEMASTIKAN PRINTER AMAN
         async function jalankanTesStruk() {
             if (!printerCharacteristic) {
                 alert('⚠️ Sambungkan Bluetooth ke printer RPPO2N dulu Ma, baru bisa tes print!');
@@ -434,7 +563,7 @@
                 console.log("Tes struk berhasil!");
             } catch (error) {
                 console.error(error);
-                alert("Gagal tes print bray! Coba koneksikan ulang bluetooth-nya.");
+                alert("Gagal tes print ma! Coba koneksikan ulang bluetooth-nya.");
             }
         }
 
@@ -518,7 +647,7 @@
 
             let teksStruk = "";
             teksStruk += "          WARUNG BJM          \n";
-            teksStruk += "    Kulineran Khas Karangasem   \n";
+            teksStruk += "    Kuliner Khas Karangasem   \n";
             teksStruk += "================================\n";
             teksStruk += `Tgl: ${new Date().toLocaleDateString('id-ID')} ${new Date().toLocaleTimeString('id-ID')}\n`;
             teksStruk += "--------------------------------\n";
@@ -550,7 +679,8 @@
                     await printerCharacteristic.writeValue(paketKecil);
                 }
                 
-                catatPemasukanHarian(totalHarga);
+                // PANGGIL FUNGSI BARU (Mengirim total nominal & struktur keranjang saat ini)
+                catatPemasukanHarian(totalHarga, keranjang);
 
                 keranjang = [];
                 hitungUlangTotal();
