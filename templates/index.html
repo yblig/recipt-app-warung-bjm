@@ -33,141 +33,63 @@
         .bali-header h1 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: 1px; }
         .bali-header p { margin: 3px 0 0 0; font-size: 12px; font-weight: bold; }
         
-        /* TOMBOL MENU PENGATURAN */
         .btn-setting-buka {
-            background: #222;
-            color: #d4af37;
-            border: 2px solid #d4af37;
-            padding: 10px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 18px;
-            font-weight: bold;
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: #222; color: #d4af37; border: 2px solid #d4af37;
+            padding: 10px; border-radius: 50%; cursor: pointer;
+            font-size: 18px; font-weight: bold; width: 45px; height: 45px;
+            display: flex; align-items: center; justify-content: center;
         }
+
+        /* KOLOM CARI MENU BARU */
+        .search-container { max-width: 480px; margin: 0 auto 15px auto; }
+        .input-cari {
+            width: 100%; padding: 12px; background: #1e1e1e; border: 1px solid #d4af37;
+            border-radius: 8px; color: #white; font-size: 15px; box-sizing: border-box;
+        }
+        .input-cari:focus { outline: none; border-color: #00f2fe; }
 
         .menu-container { display: flex; flex-direction: column; gap: 10px; max-width: 480px; margin: 0 auto; }
         
         .btn-barang { 
-            font-size: 16px; 
-            padding: 16px; 
-            background: #1e1e1e;
-            color: white; 
-            border: 2px solid #d4af37; 
-            border-radius: 12px; 
-            font-weight: bold; 
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 4px 66px rgba(0,0,0,0.2);
-            cursor: pointer;
+            font-size: 16px; padding: 16px; background: #1e1e1e; color: white; 
+            border: 2px solid #d4af37; border-radius: 12px; font-weight: bold; 
+            display: flex; justify-content: space-between; align-items: center; cursor: pointer;
         }
         .badge-harga { background: #d4af37; color: #111; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; }
 
-        /* DAFTAR KERANJANG DI LAYAR HP MAMA */
+        /* KERANJANG LAYAR */
         .box-keranjang-layar {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 12px;
-            max-width: 450px;
-            margin: 20px auto 10px auto;
-            padding: 15px;
-            text-align: left;
+            background: #1a1a1a; border: 1px solid #333; border-radius: 12px;
+            max-width: 450px; margin: 20px auto 10px auto; padding: 15px; text-align: left;
         }
-        .box-keranjang-layar h4 { margin: 0 0 10px 0; color: #d4af37; border-bottom: 1px solid #333; padding-bottom: 5px; font-size: 16px; }
-        
-        .item-keranjang-layar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px 0;
-            border-bottom: 1px dashed #333;
-        }
-        
+        .keranjang-header-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px; }
+        .keranjang-header-box h4 { margin: 0; color: #d4af37; font-size: 16px; }
+        .btn-kosongkan { background: #c0392b; color: white; border: none; padding: 5px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: bold; }
+
+        .item-keranjang-layar { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed #333; }
         .qty-control { display: flex; align-items: center; gap: 5px; }
-        .btn-qty {
-            background: #d4af37;
-            color: #111;
-            border: none;
-            padding: 5px 10px;
-            font-weight: bold;
-            font-size: 14px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .input-qty {
-            width: 45px;
-            text-align: center;
-            background: #000;
-            color: #00f2fe;
-            border: 1px solid #d4af37;
-            padding: 4px;
-            font-weight: bold;
-            font-size: 14px;
-            border-radius: 4px;
-        }
+        .btn-qty { background: #d4af37; color: #111; border: none; padding: 5px 10px; font-weight: bold; font-size: 14px; border-radius: 4px; cursor: pointer; }
+        .input-qty { width: 45px; text-align: center; background: #000; color: #00f2fe; border: 1px solid #d4af37; padding: 4px; font-weight: bold; font-size: 14px; border-radius: 4px; }
+        .btn-hapus-item { background: #c0392b; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; margin-left: 5px; }
 
-        .btn-hapus-item {
-            background: #c0392b;
-            color: white;
-            border: none;
-            padding: 6px 10px;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 12px;
-            margin-left: 5px;
-        }
-
-        .box-total { 
-            background: #1a1a1a;
-            border: 2px dashed #d4af37;
-            padding: 15px; 
-            border-radius: 12px; 
-            max-width: 450px;
-            margin: 10px auto; 
-        }
+        .box-total { background: #1a1a1a; border: 2px dashed #d4af37; padding: 15px; border-radius: 12px; max-width: 450px; margin: 10px auto; }
         .box-total h2 { margin: 0; font-size: 22px; }
         #total-layar { color: #d4af37; font-weight: 900; }
         
         .btn-bayar { 
-            font-size: 20px; 
-            padding: 16px; 
-            max-width: 480px;
-            width: 100%;
-            margin-top: 10px;
-            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-            color: #111; 
-            border: none; 
-            border-radius: 30px; 
-            font-weight: 900; 
-            box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
-            cursor: pointer;
+            font-size: 20px; padding: 16px; max-width: 480px; width: 100%; margin-top: 10px;
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); color: #111; 
+            border: none; border-radius: 30px; font-weight: 900; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3); cursor: pointer;
         }
 
-        /* ================= MODAL HALAMAN PENGATURAN SUPER PREMIUM ================= */
-        .panel-setting {
-            position: fixed;
-            top: 0; bottom: 0; left: 0; right: 0;
-            background: #121212;
-            z-index: 10000;
-            padding: 20px;
-            overflow-y: auto;
-            display: none;
-            text-align: left;
-        }
+        /* ================= PANEL HALAMAN PENGATURAN (SETTING) ================= */
+        .panel-setting { position: fixed; top: 0; bottom: 0; left: 0; right: 0; background: #121212; z-index: 10000; padding: 20px; overflow-y: auto; display: none; text-align: left; }
         .panel-setting.active { display: block; }
         .setting-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px; margin-bottom: 20px; }
         .setting-header h2 { margin: 0; color: #d4af37; }
         .btn-close-setting { background: #c0392b; color: white; border: none; padding: 8px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; }
         
-        .btn-bluetooth {
-            background: #2980b9; color: white; border: none; padding: 14px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 15px; width: 100%; box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3); margin-bottom: 25px;
-        }
+        .btn-bluetooth { background: #2980b9; color: white; border: none; padding: 14px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 15px; width: 100%; box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3); margin-bottom: 25px; }
         .btn-bluetooth.connected { background: #27ae60; box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); }
 
         .form-tambah-menu { background: #1e1e1e; border: 1px solid #333; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
@@ -182,6 +104,11 @@
         .crud-item-nama { font-weight: bold; }
         .crud-item-harga { font-size: 12px; color: #d4af37; margin-top: 2px; }
 
+        /* SAKALAIAN BOX REKAP */
+        .box-rekap { background: #1e1e1e; border: 1px solid #333; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
+        .rekap-row { display: flex; justify-content: space-between; align-items: center; background: #111; padding: 10px; border-radius: 6px; margin-bottom: 6px; }
+        .btn-copas-rekap { background: #d4af37; color: #111; border: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 12px; }
+
         #struk { display: none; }
     </style>
 </head>
@@ -190,15 +117,22 @@
     <div class="bali-header">
         <div class="bali-header-text">
             <h1>WARUNG BJM</h1>
-            <p>✨ Badung Jaya Mesari ✨</p>
+            <p>✨ Suksma, Angkul-Angkul Kuliner Bali ✨</p>
         </div>
         <button class="btn-setting-buka" onclick="bukaPanelSetting()">⚙️</button>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="cari-makanan" class="input-cari" placeholder="🔍 Cari menu jualan Mama cepat disini..." oninput="filterMenuJualan()">
     </div>
     
     <div class="menu-container" id="wadah-menu-utama"></div>
     
     <div class="box-keranjang-layar">
-        <h4>🛒 Daftar Pesanan Mama:</h4>
+        <div class="keranjang-header-box">
+            <h4>🛒 Daftar Pesanan Mama:</h4>
+            <button class="btn-kosongkan" onclick="kosongkanKeranjangSemua()">🗑️ Kosongkan</button>
+        </div>
         <div id="list-keranjang-layar">
             <span style="color: #666; font-size: 13px;">Belum ada menu yang dipilih...</span>
         </div>
@@ -216,6 +150,15 @@
             <h2>⚙️ Pengaturan Kasir BJM</h2>
             <button class="btn-close-setting" onclick="tutupPanelSetting()">❌ Tutup</button>
         </div>
+
+        <h3>📊 Rekap Pemasukan Harian Mama</h3>
+        <div class="box-rekap">
+            <div id="list-pemasukan-harian">
+                <span style="color: #666; font-size: 13px;">Belum ada data pemasukan tercatat...</span>
+            </div>
+        </div>
+
+        <hr style="border: 1px solid #333; margin: 20px 0;">
 
         <h3>🔌 Hubungkan Printer Thermal</h3>
         <button id="btn-connect" class="btn-bluetooth" onclick="hubungkanPrinterDirect()">🔌 KONEKSI BLUETOOTH (RPPO2N)</button>
@@ -236,13 +179,12 @@
             <button class="btn-simpan-menu" onclick="simpanMenuBaru()">💾 Masukkan ke Aplikasi</button>
         </div>
 
-        <h4>📋 Daftar Menu Saat Ini (Klik ❌ untuk Hapus):</h4>
+        <h4>📋 Daftar Menu Saat Ini:</h4>
         <div id="crud-list-menu"></div>
     </div>
 
 
     <script>
-        // Menu default bawaan warung saat pertama kali aplikasi dibuka
         const menuAwal = [
             { nama: 'Sate Babi K.asem', harga: 2500 },
             { nama: 'Tum Babi', harga: 3000 },
@@ -256,7 +198,6 @@
         let totalHarga = 0;
         let printerCharacteristic = null;
 
-        // FUNGSI LOAD DATA MENU DARI LOCALSTORAGE BIAR GAK HILANG PAS REFRESH
         function muatDataMenuAplikasi() {
             let dataLokal = localStorage.getItem('BJM_MENU_DATA');
             if (dataLokal) {
@@ -265,15 +206,19 @@
                 databaseMenu = [...menuAwal];
                 localStorage.setItem('BJM_MENU_DATA', JSON.stringify(databaseMenu));
             }
-            renderMenuUtama();
+            renderMenuUtama(databaseMenu);
             renderCrudListMenuSetting();
+            tampilkanRekapPemasukan();
         }
 
-        // TAMPILKAN MENU DI HALAMAN DEPAN UNTUK MAMA KLIK
-        function renderMenuUtama() {
+        function renderMenuUtama(arrayData) {
             let wadah = document.getElementById('wadah-menu-utama');
             wadah.innerHTML = '';
-            databaseMenu.forEach(item => {
+            if(arrayData.length === 0) {
+                wadah.innerHTML = '<span style="color:#666; font-size:14px; margin-top:10px;">Menu tidak ditemukan...</span>';
+                return;
+            }
+            arrayData.forEach(item => {
                 wadah.innerHTML += `
                     <button class="btn-barang" onclick="tambahKeKeranjang('${item.nama}', ${item.harga})">
                         <span>🍢 ${item.nama}</span>
@@ -283,7 +228,13 @@
             });
         }
 
-        // TAMPILKAN LIST DI HALAMAN PENGATURAN BUAT DIHAPUS-HAPUS
+        // FITUR BONUS: FILTER SATE / MENU CEBAT
+        function filterMenuJualan() {
+            let teksCari = document.getElementById('cari-makanan').value.toLowerCase().trim();
+            let hasilFilter = databaseMenu.filter(m => m.nama.toLowerCase().includes(teksCari));
+            renderMenuUtama(hasilFilter);
+        }
+
         function renderCrudListMenuSetting() {
             let wadah = document.getElementById('crud-list-menu');
             wadah.innerHTML = '';
@@ -300,7 +251,6 @@
             });
         }
 
-        // FUNGSI TAMBAH MENU BARU
         function simpanMenuBaru() {
             let nama = document.getElementById('input-nama-menu').value.trim();
             let harga = parseInt(document.getElementById('input-harga-menu').value);
@@ -312,31 +262,94 @@
 
             databaseMenu.push({ nama: nama, harga: harga });
             localStorage.setItem('BJM_MENU_DATA', JSON.stringify(databaseMenu));
-            
-            // Reset input form
             document.getElementById('input-nama-menu').value = '';
             document.getElementById('input-harga-menu').value = '';
-            
-            // Refresh semua layar
             muatDataMenuAplikasi();
-            alert(`Mantap! Menu "${nama}" sukses terdaftar di aplikasi.`);
+            document.getElementById('cari-makanan').value = ''; // Reset bar cari
+            alert(`Mantap! Menu "${nama}" sukses terdaftar.`);
         }
 
-        // FUNGSI HAPUS MENU JUALAN
         function hapusMenuDariAplikasi(index) {
             let konfirmasi = confirm(`Gilby yakin mau menghapus menu "${databaseMenu[index].nama}"?`);
             if (konfirmasi) {
                 databaseMenu.splice(index, 1);
                 localStorage.setItem('BJM_MENU_DATA', JSON.stringify(databaseMenu));
                 muatDataMenuAplikasi();
+                document.getElementById('cari-makanan').value = '';
             }
         }
 
-        // CONTROL NAVIGASI PANEL SETTING
+        // FITUR UTAMA: SIMPAN TOTAL TRANSAKSI KE DATA HARIAN MAMA
+        function catatPemasukanHarian(nominal) {
+            if (nominal <= 0) return;
+            let hariIni = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+            
+            let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN');
+            let rekapPemasukan = dataRekapLokal ? JSON.parse(dataRekapLokal) : {};
+
+            if (rekapPemasukan[hariIni]) {
+                rekapPemasukan[hariIni] += nominal;
+            } else {
+                rekapPemasukan[hariIni] = nominal;
+            }
+
+            localStorage.setItem('BJM_REKAP_PEMASUKAN', JSON.stringify(rekapPemasukan));
+            tampilkanRekapPemasukan();
+        }
+
+        // FITUR UTAMA: TAMPILKAN DAN COPAS DATA REKAP
+        function tampilkanRekapPemasukan() {
+            let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN');
+            let wadah = document.getElementById('list-pemasukan-harian');
+            
+            if (!dataRekapLokal || dataRekapLokal === '{}') {
+                wadah.innerHTML = '<span style="color: #666; font-size: 13px;">Belum ada data pemasukan tercatat...</span>';
+                return;
+            }
+
+            let rekap = JSON.parse(dataRekapLokal);
+            wadah.innerHTML = '';
+            
+            // Urutkan biar tanggal terbaru paling atas
+            Object.keys(rekap).reverse().forEach(tanggal => {
+                let totalDuit = rekap[tanggal];
+                let teksKlip = `Rekap Warung BJM\nTanggal: ${tanggal}\nTotal Pemasukan: Rp ${totalDuit.toLocaleString('id-ID')}`;
+                
+                wadah.innerHTML += `
+                    <div class="rekap-row">
+                        <div>
+                            <b style="color:#d4af37; font-size:14px;">📅 ${tanggal}</b><br>
+                            <span style="font-size:13px; color:#00f2fe;">Total: Rp ${totalDuit.toLocaleString('id-ID')}</span>
+                        </div>
+                        <button class="btn-copas-rekap" onclick="copasTeksRekap('${btoa(teksKlip)}')">📋 Copas</button>
+                    </div>
+                `;
+            });
+        }
+
+        function copasTeksRekap(base64Teks) {
+            let teksAsli = atob(base64Teks);
+            navigator.clipboard.writeText(teksAsli).then(() => {
+                alert("📋 Rekap harian sukses disalin ke memori HP Mama! Tinggal paste/tempel di WA Mama.");
+            }).catch(() => {
+                alert("Gagal menyalin otomatis bray!");
+            });
+        }
+
         function bukaPanelSetting() { document.getElementById('panel-setting-admin').classList.add('active'); }
         function tutupPanelSetting() { document.getElementById('panel-setting-admin').classList.remove('active'); }
 
-        // ================= KONEKSI BLUETOOTH DIRECT RPPO2N =================
+        // FITUR BONUS: KOSONGKAN KERANJANG TOTAL
+        function kosongkanKeranjangSemua() {
+            if(keranjang.length === 0) return;
+            let yakin = confirm("Ma, yakin mau hapus/kosongkan seluruh isi keranjang belanja?");
+            if(yakin) {
+                keranjang = [];
+                hitungUlangTotal();
+            }
+        }
+
+        // BLUETOOTH RPPO2N DIRECT
         async function hubungkanPrinterDirect() {
             try {
                 const device = await navigator.bluetooth.requestDevice({
@@ -362,11 +375,10 @@
             } catch (error) {
                 console.error(error);
                 document.getElementById('btn-connect').innerText = "❌ GAGAL KONEK, COBA LAGI";
-                alert("Gagal terhubung: " + error.message + "\n\nPastikan printer nyala dan password-nya 0000.");
+                alert("Gagal terhubung: " + error.message);
             }
         }
 
-        // ================= SISTEM KERANJANG BELANJA KASIR =================
         function tambahKeKeranjang(nama, harga) {
             let item = keranjang.find(i => i.nama === nama);
             if (item) {
@@ -432,7 +444,6 @@
             hitungUlangTotal();
         }
 
-        // ================= DIRECT CEK / PRINT BLUETOOTH =================
         async function siapkanDanPrint() {
             if (keranjang.length === 0) {
                 alert('Keranjang masih kosong, Gilby!');
@@ -477,15 +488,20 @@
                     const paketKecil = dataBiner.slice(i, i + ukuranMaksimalPaket);
                     await printerCharacteristic.writeValue(paketKecil);
                 }
+                
+                // CATAT NOMINAL KE REKAP PEMASUKAN SEBELUM KERANJANG DI-RESET
+                catatPemasukanHarian(totalHarga);
+
                 keranjang = [];
                 hitungUlangTotal();
+                document.getElementById('cari-makanan').value = ''; // Clear search bar
+                renderMenuUtama(databaseMenu);
             } catch (error) {
                 console.error(error);
                 alert("Gagal kirim data ke printer bray! Buka Pengaturan lalu sambungkan lagi.");
             }
         }
 
-        // JALANKAN PROSES DATABASE SAAT APLIKASI PERTAMA KALI DI-LOAD
         window.onload = muatDataMenuAplikasi;
     </script>
 </body>
