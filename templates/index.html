@@ -16,8 +16,36 @@
             min-height: 100vh;
             -webkit-user-select: none;
             user-select: none;
+            transition: background 0.3s, color 0.3s, font-size 0.2s;
         }
         
+        /* FONT SIZE APLIKASI WEB VIRTUAL */
+        body.web-font-small { font-size: 14px; }
+        body.web-font-medium { font-size: 16px; }
+        body.web-font-large { font-size: 19px; }
+        body.web-font-xlarge { font-size: 22px; }
+
+        /* Tema Terang Kustom */
+        body.light-theme {
+            background: #f5f5f5;
+            color: #111;
+        }
+        body.light-theme .btn-barang {
+            background: #fff; color: #111; border-color: #aa7c11;
+        }
+        body.light-theme .box-keranjang-layar, 
+        body.light-theme .box-total, 
+        body.light-theme .panel-setting,
+        body.light-theme .form-tambah-menu,
+        body.light-theme .setting-card {
+            background: #fff; color: #111; border-color: #ddd;
+        }
+        body.light-theme .input-cari, 
+        body.light-theme .form-input,
+        body.light-theme .input-qty {
+            background: #f0f0f0; color: #111; border-color: #aa7c11;
+        }
+
         .bali-header {
             background: linear-gradient(180deg, #d4af37 0%, #aa7c11 100%);
             color: #111;
@@ -30,31 +58,36 @@
             align-items: center;
         }
         .bali-header-text { text-align: left; }
-        .bali-header h1 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: 1px; }
-        .bali-header p { margin: 3px 0 0 0; font-size: 12px; font-weight: bold; }
+        .bali-header h1 { margin: 0; font-size: 1.5em; font-weight: 900; letter-spacing: 1px; }
+        .bali-header p { margin: 3px 0 0 0; font-size: 0.75em; font-weight: bold; }
         
         .btn-setting-buka {
             background: #222; color: #d4af37; border: 2px solid #d4af37;
             padding: 10px; border-radius: 50%; cursor: pointer;
-            font-size: 18px; font-weight: bold; width: 45px; height: 45px;
+            font-size: 1.1em; font-weight: bold; width: 45px; height: 45px;
             display: flex; align-items: center; justify-content: center;
         }
 
         .search-container { max-width: 480px; margin: 0 auto 15px auto; }
         .input-cari {
             width: 100%; padding: 12px; background: #1e1e1e; border: 1px solid #d4af37;
-            border-radius: 8px; color: white; font-size: 15px; box-sizing: border-box;
+            border-radius: 8px; color: white; font-size: 0.95em; box-sizing: border-box;
         }
         .input-cari:focus { outline: none; border-color: #00f2fe; }
 
         .menu-container { display: flex; flex-direction: column; gap: 10px; max-width: 480px; margin: 0 auto; }
         
+        /* Font Size Ukuran Menu Tombol */
+        .menu-small .btn-barang { padding: 10px; font-size: 0.8em; }
+        .menu-medium .btn-barang { padding: 16px; font-size: 1em; }
+        .menu-large .btn-barang { padding: 22px; font-size: 1.25em; }
+
         .btn-barang { 
-            font-size: 16px; padding: 16px; background: #1e1e1e; color: white; 
+            background: #1e1e1e; color: white; 
             border: 2px solid #d4af37; border-radius: 12px; font-weight: bold; 
             display: flex; justify-content: space-between; align-items: center; cursor: pointer;
         }
-        .badge-harga { background: #d4af37; color: #111; padding: 4px 8px; border-radius: 6px; font-size: 14px; font-weight: 900; }
+        .badge-harga { background: #d4af37; color: #111; padding: 4px 8px; border-radius: 6px; font-size: 0.85em; font-weight: 900; }
 
         /* KERANJANG LAYAR */
         .box-keranjang-layar {
@@ -62,98 +95,125 @@
             max-width: 450px; margin: 20px auto 10px auto; padding: 15px; text-align: left;
         }
         .keranjang-header-box { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px; }
-        .keranjang-header-box h4 { margin: 0; color: #d4af37; font-size: 16px; }
-        .btn-kosongkan { background: #c0392b; color: white; border: none; padding: 5px 10px; border-radius: 6px; font-size: 12px; cursor: pointer; font-weight: bold; }
+        .keranjang-header-box h4 { margin: 0; color: #d4af37; font-size: 1em; }
+        .btn-kosongkan { background: #c0392b; color: white; border: none; padding: 5px 10px; border-radius: 6px; font-size: 0.75em; cursor: pointer; font-weight: bold; }
 
         .item-keranjang-layar { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed #333; }
         .qty-control { display: flex; align-items: center; gap: 5px; }
-        .btn-qty { background: #d4af37; color: #111; border: none; padding: 5px 10px; font-weight: bold; font-size: 14px; border-radius: 4px; cursor: pointer; }
-        .input-qty { width: 45px; text-align: center; background: #000; color: #00f2fe; border: 1px solid #d4af37; padding: 4px; font-weight: bold; font-size: 14px; border-radius: 4px; }
-        .btn-hapus-item { background: #c0392b; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; margin-left: 5px; }
+        .btn-qty { background: #d4af37; color: #111; border: none; padding: 5px 10px; font-weight: bold; font-size: 0.9em; border-radius: 4px; cursor: pointer; }
+        .input-qty { width: 45px; text-align: center; background: #000; color: #00f2fe; border: 1px solid #d4af37; padding: 4px; font-weight: bold; font-size: 0.9em; border-radius: 4px; }
+        .btn-hapus-item { background: #c0392b; color: white; border: none; padding: 6px 10px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.75em; margin-left: 5px; }
 
         .box-total { background: #1a1a1a; border: 2px dashed #d4af37; padding: 15px; border-radius: 12px; max-width: 450px; margin: 10px auto; }
-        .box-total h2 { margin: 0; font-size: 22px; }
+        .box-total h2 { margin: 0; font-size: 1.4em; }
         #total-layar { color: #d4af37; font-weight: 900; }
         
         .btn-bayar { 
-            font-size: 20px; padding: 16px; max-width: 480px; width: 100%; margin-top: 10px;
+            font-size: 1.25em; padding: 16px; max-width: 480px; width: 100%; margin-top: 10px; margin-bottom: 40px;
             background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); color: #111; 
             border: none; border-radius: 30px; font-weight: 900; box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3); cursor: pointer;
+        }
+
+        /* ================= TOMBOL MENGAMBANG LACI KASIR ================= */
+        .btn-drawer-floating {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%);
+            color: white;
+            border: 2px solid #fff;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(142, 68, 173, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
         }
 
         /* ================= PANEL HALAMAN PENGATURAN (SETTING) ================= */
         .panel-setting { position: fixed; top: 0; bottom: 0; left: 0; right: 0; background: #121212; z-index: 10000; padding: 20px; overflow-y: auto; display: none; text-align: left; }
         .panel-setting.active { display: block; }
         .setting-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #d4af37; padding-bottom: 10px; margin-bottom: 20px; }
-        .setting-header h2 { margin: 0; color: #d4af37; }
+        .setting-header h2 { margin: 0; color: #d4af37; font-size: 1.3em; }
         .btn-close-setting { background: #c0392b; color: white; border: none; padding: 8px 15px; border-radius: 6px; font-weight: bold; cursor: pointer; }
         
-        .btn-bluetooth { background: #2980b9; color: white; border: none; padding: 14px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 15px; width: 100%; box-shadow: 0 4px 10px rgba(41, 128, 185, 0.3); margin-bottom: 10px; }
-        .btn-bluetooth.connected { background: #27ae60; box-shadow: 0 4px 10px rgba(39, 174, 96, 0.3); }
-        
-        .btn-test-print { background: #e67e22; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 14px; width: 100%; margin-bottom: 25px; box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3); }
+        .setting-card { background: #1e1e1e; border: 1px solid #333; padding: 15px; border-radius: 12px; margin-bottom: 15px; }
+        .setting-card h3 { margin: 0 0 10px 0; color: #d4af37; font-size: 1em; border-bottom: 1px solid #333; padding-bottom: 5px; }
 
-        .form-tambah-menu { background: #1e1e1e; border: 1px solid #333; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
-        .form-tambah-menu h4 { margin: 0 0 10px 0; color: #d4af37; }
+        .konten-khusus-admin { display: none; }
+        .konten-khusus-admin.aktif { display: block; }
+
+        .setting-row-toggle { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #2a2a2a; }
+        .setting-info-text { flex: 1; padding-right: 10px; }
+        .setting-info-text b { font-size: 0.9em; color: #eee; }
+        body.light-theme .setting-info-text b { color: #111; }
+        .setting-info-text span { font-size: 0.7em; color: #888; display: block; }
+
+        .toggle-container { display: flex; align-items: center; cursor: pointer; }
+        .toggle-switch { position: relative; width: 46px; height: 22px; background: #c0392b; border-radius: 50px; transition: 0.3s; }
+        .toggle-switch::before { content: ""; position: absolute; width: 16px; height: 16px; border-radius: 50%; background: white; top: 3px; left: 3px; transition: 0.3s; }
+        input[type="checkbox"]:checked + .toggle-switch { background: #27ae60; }
+        input[type="checkbox"]:checked + .toggle-switch::before { transform: translateX(24px); }
+
+        .btn-bluetooth { background: #2980b9; color: white; border: none; padding: 12px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 0.9em; width: 100%; margin-bottom: 10px; }
+        .btn-bluetooth.connected { background: #27ae60; }
+        .btn-test-print { background: #e67e22; color: white; border: none; padding: 10px; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 0.85em; width: 100%; margin-bottom: 10px; }
+
         .form-group { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
-        .form-group label { font-size: 13px; color: #aaa; }
-        .form-input { background: #000; border: 1px solid #d4af37; padding: 10px; border-radius: 6px; color: white; font-size: 14px; }
-        .btn-simpan-menu { background: #27ae60; color: white; border: none; padding: 10px; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 14px; }
+        .form-group label { font-size: 0.85em; color: #aaa; }
+        .form-input { background: #000; border: 1px solid #d4af37; padding: 10px; border-radius: 6px; color: white; font-size: 0.9em; }
+        .btn-action-ui { background: #27ae60; color: white; border: none; padding: 10px; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 0.9em; }
+        .btn-danger-ui { background: #c0392b; color: white; border: none; padding: 10px; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 0.9em; }
 
-        .crud-item-row { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #d4af37; }
-        .crud-item-info { display: flex; flex-direction: column; }
-        .crud-item-nama { font-weight: bold; }
-        .crud-item-harga { font-size: 12px; color: #d4af37; margin-top: 2px; }
+        .toast-notif { position: fixed; bottom: -100px; left: 50%; transform: translateX(-50%); background: #d4af37; color: #111; padding: 12px 25px; border-radius: 30px; font-weight: bold; box-shadow: 0 4px 15px rgba(0,0,0,0.5); z-index: 99999; transition: bottom 0.4s ease; font-size: 0.9em; }
+        .toast-notif.show { bottom: 30px; }
 
-        /* BOX REKAP ADVANCED DENGAN DROPDOWN */
         .box-rekap { background: #1e1e1e; border: 1px solid #333; padding: 15px; border-radius: 12px; margin-bottom: 20px; }
-        .rekap-tanggal-item { background: #111; border: 1px solid #333; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
-        .rekap-header-click { padding: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; user-select: none; }
-        .rekap-header-click:hover { background: #1a1a1a; }
-        .rekap-info-utama b { color: #d4af37; font-size: 14px; }
-        .rekap-panah { color: #d4af37; font-weight: bold; font-size: 14px; transition: transform 0.2s; }
+        .rekap-summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .summary-card { background: #111; border: 1px solid #d4af37; padding: 10px; border-radius: 8px; text-align: center; }
+        .summary-card p { margin: 0; font-size: 0.75em; color: #aaa; }
+        .summary-card h4 { margin: 5px 0 0 0; color: #00f2fe; font-size: 0.9em; }
         
+        .rekap-tanggal-item { background: #111; border: 1px solid #333; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+        .rekap-header-click { padding: 12px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; }
         .rekap-dropdown-detail { display: none; padding: 10px; background: #161616; border-top: 1px dashed #333; }
         .rekap-dropdown-detail.active { display: block; }
-        
-        .struk-item-row { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; border-left: 3px solid #00f2fe; }
-        .struk-info { font-size: 13px; color: #eee; text-align: left; }
-        .struk-jam { font-size: 11px; color: #888; display: block; margin-bottom: 2px; }
-        .struk-items-list { font-size: 11px; color: #aaa; margin: 0; padding-left: 14px; }
-        
-        .rekap-tombol-bawah-grup { display: flex; gap: 10px; margin-top: 10px; border-top: 1px solid #333; padding-top: 10px; }
-        .btn-copas-rekap { background: #d4af37; color: #111; border: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; flex: 1; }
-        .btn-hapus-rekap-total { background: #c0392b; color: white; border: none; padding: 8px 14px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 12px; }
-        .btn-hapus-struk-tunggal { background: #e74c3c; color: white; border: none; padding: 4px 8px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; }
+        .struk-item-row { display: flex; justify-content: space-between; align-items: center; background: #222; padding: 8px 12px; border-radius: 6px; margin-bottom: 6px; font-size: 0.85em; }
+        .crud-item-row { display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; padding: 12px; border-radius: 8px; margin-bottom: 8px; border-left: 4px solid #d4af37; font-size: 0.9em; }
     </style>
 </head>
 <body>
 
-    <!-- Header Kasir -->
+    <div id="bjm-toast" class="toast-notif">Suksma bray!</div>
+
+    <button id="btn-open-drawer-floating" class="btn-drawer-floating" title="Buka Laci Kasir Manual" onclick="bukaLaciKasirManual()">🔓</button>
+
     <div class="bali-header">
         <div class="bali-header-text">
             <h1>WARUNG BJM</h1>
-            <p>✨ Suksma, Angkul-Angkul Kuliner Bali ✨</p>
+            <p>✨ Kuliner Khas Karangasem ✨</p>
         </div>
         <button class="btn-setting-buka" onclick="bukaPanelSetting()">⚙️</button>
     </div>
 
-    <!-- BAR CARI MENU -->
-    <div class="search-container">
+    <div class="search-container" id="container-bar-cari">
         <input type="text" id="cari-makanan" class="input-cari" placeholder="🔍 Cari menu jualan Mama cepat disini..." oninput="filterMenuJualan()">
     </div>
     
-    <!-- Wadah Tombol Menu -->
-    <div class="menu-container" id="wadah-menu-utama"></div>
+    <div class="menu-container menu-medium" id="wadah-menu-utama"></div>
     
-    <!-- Daftar Keranjang Belanja -->
     <div class="box-keranjang-layar">
         <div class="keranjang-header-box">
             <h4>🛒 Daftar Pesanan Mama:</h4>
             <button class="btn-kosongkan" onclick="kosongkanKeranjangSemua()">🗑️ Kosongkan</button>
         </div>
         <div id="list-keranjang-layar">
-            <span style="color: #666; font-size: 13px;">Belum ada menu yang dipilih...</span>
+            <span style="color: #666; font-size: 0.85em;">Belum ada menu yang dipilih...</span>
         </div>
     </div>
     
@@ -164,48 +224,179 @@
     <button class="btn-bayar" onclick="siapkanDanPrint()">🔥 BAYAR & PRINT</button>
 
 
-    <!-- ================= PANEL HALAMAN PENGATURAN (SETTING) ================= -->
     <div class="panel-setting" id="panel-setting-admin">
         <div class="setting-header">
             <h2>⚙️ Pengaturan Kasir BJM</h2>
             <button class="btn-close-setting" onclick="tutupPanelSetting()">❌ Tutup</button>
         </div>
 
-        <!-- REKAP PEMASUKAN HARIAN MAMA -->
-        <h3>📊 Rekap Pemasukan & Detail Struk</h3>
-        <div class="box-rekap">
-            <div id="list-pemasukan-harian">
-                <span style="color: #666; font-size: 13px;">Belum ada data pemasukan tercatat...</span>
+        <div class="setting-card" id="card-auth-admin-ui">
+            <h3>🔐 Autentikasi Mode Admin</h3>
+            <div id="form-login-admin-box">
+                <div class="form-group">
+                    <label>Masukkan Password Admin:</label>
+                    <input type="password" id="input-pass-login" class="form-input" placeholder="Ketik password...">
+                </div>
+                <button class="btn-action-ui" style="width:100%;" onclick="prosesLoginAdminUI()">Masuk Mode Admin</button>
+            </div>
+            <div id="form-logout-admin-box" style="display:none; text-align:center;">
+                <p style="color:#27ae60; font-weight:bold; margin:5px 0;">🔓 Kamu sedang berada dalam Mode Admin aktif bray!</p>
+                <button class="btn-danger-ui" style="width:100%; margin-top:5px;" onclick="prosesLogoutAdminUI()">Keluar / Kunci Kembali</button>
             </div>
         </div>
 
-        <hr style="border: 1px solid #333; margin: 20px 0;">
-
-        <!-- PENGATURAN BLUETOOTH PRINTER & TES STRUK -->
-        <h3>🔌 Hubungkan Printer Thermal</h3>
-        <button id="btn-connect" class="btn-bluetooth" onclick="hubungkanPrinterDirect()">🔌 KONEKSI BLUETOOTH (RPPO2N)</button>
-        <button id="btn-test-print" class="btn-test-print" onclick="jalankanTesStruk()">📝 TES PRINT STRUK</button>
-
-        <hr style="border: 1px solid #333; margin: 20px 0;">
-
-        <!-- FORM TAMBAH MENU BARU -->
-        <h3>🍱 Kelola Daftar Menu Jualan</h3>
-        <div class="form-tambah-menu">
-            <h4>➕ Tambah Menu Baru</h4>
-            <div class="form-group">
-                <label>Nama Menu (Contoh: Es Teh Manis)</label>
-                <input type="text" id="input-nama-menu" class="form-input" placeholder="Ketik nama makanan/minuman...">
+        <div class="setting-card">
+            <h3>🔌 Perangkat Keras & Font</h3>
+            <button id="btn-connect" class="btn-bluetooth" onclick="hubungkanPrinterDirect()">🔌 KONEKSI BLUETOOTH (RPPO2N)</button>
+            
+            <div class="form-group" style="margin-top: 10px;">
+                <label style="font-weight: bold; color: #d4af37;">📏 Ukuran Teks Kertas Struk Mama:</label>
+                <select id="set-font-size-printer" class="form-input" style="border-color: #d4af37; padding: 8px;" onchange="gantiUkuranFontPrinter(this.value)">
+                    <option value="normal">Normal (Bawaan Pabrik)</option>
+                    <option value="medium">Sedang (Lebih Jelas)</option>
+                    <option value="large">Besar (Jumbo Mantap)</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label>Harga Jual (Angka Saja, Contoh: 5000)</label>
-                <input type="number" id="input-harga-menu" class="form-input" placeholder="Contoh: 5000">
+
+            <div class="form-group" style="margin-top: 10px;">
+                <label style="font-weight: bold; color: #00f2fe;">📱 Ukuran Tulisan Aplikasi (Layar Web):</label>
+                <select id="set-font-size-web" class="form-input" style="border-color: #00f2fe; padding: 8px;" onchange="gantiUkuranFontWebLayars(this.value)">
+                    <option value="small">Kecil</option>
+                    <option value="medium">Normal / Sedang</option>
+                    <option value="large">Besar</option>
+                    <option value="xlarge">Sangat Besar (Jelas Banget)</option>
+                </select>
             </div>
-            <button class="btn-simpan-menu" onclick="simpanMenuBaru()">💾 Masukkan ke Aplikasi</button>
+            
+            <button id="btn-test-print" class="btn-test-print" style="margin-top: 12px;" onclick="jalankanTesStruk()">📝 TES PRINT STRUK</button>
         </div>
 
-        <h4>📋 Daftar Menu Saat Ini:</h4>
-        <div id="crud-list-menu"></div>
-    </div>
+        <div class="setting-card">
+            <h3>⚙️ Menu Konfigurasi Aplikasi (15 Opsi Kustom)</h3>
+            
+            <div class="setting-row-toggle">
+                <div class="setting-info-text"><b>1. Tema Tampilan Terang (Light)</b><span>Ubah warna background jadi putih bersih bray.</span></div>
+                <label class="toggle-container"><input type="checkbox" id="set-light-theme" style="display:none;" onchange="updateSettingOpsi(1, this.checked)"><div class="toggle-switch"></div></label>
+            </div>
+
+            <div class="setting-row-toggle">
+                <div class="setting-info-text"><b>2. Tombol Menu Jumbo</b><span>Perbesar ukuran tombol daftar menu utama di layar depan.</span></div>
+                <label class="toggle-container"><input type="checkbox" id="set-jumbo-menu" style="display:none;" onchange="updateSettingOpsi(2, this.checked)"><div class="toggle-switch"></div></label>
+            </div>
+
+            <div class="setting-row-toggle">
+                <div class="setting-info-text"><b>3. Tampilkan Kolom Cari Menu</b><span>Sembunyikan/tampilkan bar pencarian di halaman utama.</span></div>
+                <label class="toggle-container"><input type="checkbox" id="set-show-search" style="display:none;" onchange="updateSettingOpsi(3, this.checked)"><div class="toggle-switch"></div></label>
+            </div>
+
+            <div class="setting-row-toggle">
+                <div class="setting-info-text"><b>4. Proteksi Tombol Kosongkan</b><span>Wajib konfirmasi klik popup sebelum bersihin keranjang.</span></div>
+                <label class="toggle-container"><input type="checkbox" id="set-confirm-clear" style="display:none;" onchange="updateSettingOpsi(4, this.checked)"><div class="toggle-switch"></div></label>
+            </div>
+
+            <div class="setting-row-toggle">
+                <div class="setting-info-text"><b>5. Efek Getar / Suara Klik</b><span>Beri umpan balik notifikasi internal waktu menu diklik.</span></div>
+                <label class="toggle-container"><input type="checkbox" id="set-click-sound" style="display:none;" onchange="updateSettingOpsi(5, this.checked)"><div class="toggle-switch"></div></label>
+            </div>
+
+            <div id="grup-setting-khusus-admin-saja" style="opacity: 0.4; pointer-events: none;">
+                
+                <div style="padding: 10px 0; border-bottom: 1px solid #2a2a2a;">
+                    <b style="font-size: 0.9em; color:#d4af37;">6. Modifikasi Password Admin Baru</b>
+                    <div style="display:flex; gap:5px; margin-top:5px;">
+                        <input type="text" id="input-pass-baru-ui" class="form-input" style="flex:1; padding:6px;" placeholder="Ketik pass baru...">
+                        <button class="btn-action-ui" style="font-size:0.8em; padding:0 10px;" onclick="prosesGantiPasswordUI()">Simpan</button>
+                    </div>
+                </div>
+
+                <div class="setting-row-toggle">
+                    <div class="setting-info-text"><b>7. Auto Njeglek Laci Kasir</b><span>Laci otomatis keluar sesaat setelah menekan tombol Bayar.</span></div>
+                    <label class="toggle-container"><input type="checkbox" id="set-auto-drawer" style="display:none;" onchange="updateSettingOpsi(7, this.checked)"><div class="toggle-switch"></div></label>
+                </div>
+
+                <div class="setting-row-toggle">
+                    <div class="setting-info-text"><b>8. Print Judul Toko (Header)</b><span>Aktifkan pencetakan teks 'WARUNG BJM' di struk kertas.</span></div>
+                    <label class="toggle-container"><input type="checkbox" id="set-print-header" style="display:none;" onchange="updateSettingOpsi(8, this.checked)"><div class="toggle-switch"></div></label>
+                </div>
+
+                <div class="setting-row-toggle">
+                    <div class="setting-info-text"><b>9. Print Kata Penutup (Footer)</b><span>Aktifkan baris ucapan 'Matur Suksma' di akhir struk printer.</span></div>
+                    <label class="toggle-container"><input type="checkbox" id="set-print-footer" style="display:none;" onchange="updateSettingOpsi(9, this.checked)"><div class="toggle-switch"></div></label>
+                </div>
+
+                <div style="padding: 10px 0; border-bottom: 1px solid #2a2a2a; display:flex; justify-content:space-between; align-items:center;">
+                    <div class="setting-info-text"><b>10. Format Teks Mata Uang</b><span>Kustomisasi awalan harga (Contoh: Rp atau IDR).</span></div>
+                    <select id="set-currency-symbol" class="form-input" style="padding:4px; border-color:#d4af37;" onchange="updateSettingOpsi(10, this.value)">
+                        <option value="Rp">Rp (Rupiah)</option>
+                        <option value="IDR">IDR</option>
+                        <option value="Rp.">Rp.</option>
+                    </select>
+                </div>
+
+                <div style="padding: 10px 0; border-bottom: 1px solid #2a2a2a;">
+                    <div class="setting-info-text"><b>11. Kustom Ucapan Footer Struk</b><span>Ganti kalimat doa penutup di bagian paling bawah struk.</span></div>
+                    <input type="text" id="set-text-footer-val" class="form-input" style="width:100%; margin-top:5px; padding:6px;" onchange="updateSettingOpsi(11, this.value)" placeholder="Matur Suksma bray!">
+                </div>
+
+                <div class="setting-row-toggle">
+                    <div class="setting-info-text"><b>12. Huruf Tebal Kuantitas Item</b><span>Ubah teks quantity di keranjang jadi lebih kontras menonjol.</span></div>
+                    <label class="toggle-container"><input type="checkbox" id="set-bold-qty" style="display:none;" onchange="updateSettingOpsi(12, this.checked)"><div class="toggle-switch"></div></label>
+                </div>
+
+                <div class="setting-row-toggle">
+                    <div class="setting-info-text"><b>13. Mode Struk Super Irit</b><span>Hilangkan baris pembatas spasi kosong biar hemat kertas thermal.</span></div>
+                    <label class="toggle-container"><input type="checkbox" id="set-eco-print" style="display:none;" onchange="updateSettingOpsi(13, this.checked)"><div class="toggle-switch"></div></label>
+                </div>
+
+                <div class="setting-row-toggle">
+                    <div class="setting-info-text"><b>14. Izinkan Proteksi Hapus Struk Harian</b><span>Kunci tombol silang rekap transaksi biar gak gampang dimanipulasi.</span></div>
+                    <label class="toggle-container"><input type="checkbox" id="set-lock-delete-rekap" style="display:none;" onchange="updateSettingOpsi(14, this.checked)"><div class="toggle-switch"></div></label>
+                </div>
+
+                <div style="padding: 12px 0 0 0;">
+                    <b style="font-size: 0.9em; color:#c0392b; display:block; margin-bottom:5px;">15. Pembersihan Total Aplikasi (Reset Pabrik)</b>
+                    <button class="btn-danger-ui" style="font-size:0.8em; padding:6px 12px;" onclick="prosesResetPabrikUI()">Reset Semua Data Menu & Rekap</button>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="area-rahasia-admin" class="konten-khusus-admin">
+            <h3>📊 Rekap Pemasukan & Ringkasan Omset</h3>
+            <div class="box-rekap">
+                <div class="rekap-summary-grid">
+                    <div class="summary-card">
+                        <p>🗓️ 7 Hari Terakhir</p>
+                        <h4 id="summary-mingguan">Rp 0</h4>
+                    </div>
+                    <div class="summary-card">
+                        <p>📅 Bulan Ini</p>
+                        <h4 id="summary-bulanan">Rp 0</h4>
+                    </div>
+                </div>
+                <div id="list-pemasukan-harian">
+                    <span style="color: #666; font-size: 0.85em;">Belum ada data pemasukan tercatat...</span>
+                </div>
+            </div>
+
+            <h3>🍱 Kelola Daftar Menu Jualan</h3>
+            <div class="form-tambah-menu">
+                <h4>➕ Tambah Menu Baru</h4>
+                <div class="form-group">
+                    <label>Nama Menu (Contoh: Es Teh Manis)</label>
+                    <input type="text" id="input-nama-menu" class="form-input" placeholder="Ketik nama makanan/minuman...">
+                </div>
+                <div class="form-group">
+                    <label>Harga Jual (Angka Saja, Contoh: 5000)</label>
+                    <input type="number" id="input-harga-menu" class="form-input" placeholder="Contoh: 5000">
+                </div>
+                <button class="btn-action-ui" onclick="simpanMenuBaru()">💾 Masukkan ke Aplikasi</button>
+            </div>
+
+            <h4>📋 Daftar Menu Saat Ini:</h4>
+            <div id="crud-list-menu"></div>
+        </div>
+        </div>
 
 
     <script>
@@ -221,32 +412,205 @@
         let keranjang = [];
         let totalHarga = 0;
         let printerCharacteristic = null;
+        let isAdminLoggedIn = false; 
+
+        let configApp = {
+            lightTheme: false,
+            jumboMenu: false,
+            showSearch: true,
+            confirmClear: true,
+            clickSound: true,
+            passwordAdmin: "adminbjm",
+            autoDrawer: true,
+            printHeader: true,
+            printFooter: true,
+            currencySymbol: "Rp",
+            textFooterVal: "Semoga Hari Anda Cerah!",
+            boldQty: false,
+            ecoPrint: false,
+            lockDeleteRekap: false,
+            fontSizePrinter: "normal",
+            fontSizeWeb: "medium" // Menyimpan setelan ukuran tulisan layar web bray!
+        };
+
+        function tampilkanToast(pesan) {
+            const toast = document.getElementById('bjm-toast');
+            toast.innerText = pesan;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 2500);
+        }
 
         function muatDataMenuAplikasi() {
             let dataLokal = localStorage.getItem('BJM_MENU_DATA');
-            if (dataLokal) {
-                databaseMenu = JSON.parse(dataLokal);
-            } else {
+            if (dataLokal) { databaseMenu = JSON.parse(dataLokal); } 
+            else {
                 databaseMenu = [...menuAwal];
                 localStorage.setItem('BJM_MENU_DATA', JSON.stringify(databaseMenu));
             }
+
+            let configLokal = localStorage.getItem('BJM_CONFIG_SYSTEM');
+            if (configLokal) { 
+                configApp = JSON.parse(configLokal); 
+                if(!configApp.fontSizePrinter) configApp.fontSizePrinter = "normal";
+                if(!configApp.fontSizeWeb) configApp.fontSizeWeb = "medium"; // Validasi nilai baru
+            } 
+            else { localStorage.setItem('BJM_CONFIG_SYSTEM', JSON.stringify(configApp)); }
+
+            sinkronisasiTampilanUIBerdasarkanConfig();
             renderMenuUtama(databaseMenu);
             renderCrudListMenuSetting();
             tampilkanRekapPemasukan();
+            evaluasiStatusLoginAdminUI();
+        }
+
+        function sinkronisasiTampilanUIBerdasarkanConfig() {
+            document.getElementById('set-light-theme').checked = configApp.lightTheme;
+            document.getElementById('set-jumbo-menu').checked = configApp.jumboMenu;
+            document.getElementById('set-show-search').checked = configApp.showSearch;
+            document.getElementById('set-confirm-clear').checked = configApp.confirmClear;
+            document.getElementById('set-click-sound').checked = configApp.clickSound;
+            document.getElementById('set-auto-drawer').checked = configApp.autoDrawer;
+            document.getElementById('set-print-header').checked = configApp.printHeader;
+            document.getElementById('set-print-footer').checked = configApp.printFooter;
+            document.getElementById('set-currency-symbol').value = configApp.currencySymbol;
+            document.getElementById('set-text-footer-val').value = configApp.textFooterVal;
+            document.getElementById('set-bold-qty').checked = configApp.boldQty;
+            document.getElementById('set-eco-print').checked = configApp.ecoPrint;
+            document.getElementById('set-lock-delete-rekap').checked = configApp.lockDeleteRekap;
+            document.getElementById('set-font-size-printer').value = configApp.fontSizePrinter;
+            document.getElementById('set-font-size-web').value = configApp.fontSizeWeb;
+
+            if (configApp.lightTheme) document.body.classList.add('light-theme');
+            else document.body.classList.remove('light-theme');
+
+            // Setel kelas font layar web bray!
+            document.body.classList.remove('web-font-small', 'web-font-medium', 'web-font-large', 'web-font-xlarge');
+            document.body.classList.add('web-font-' + configApp.fontSizeWeb);
+
+            const wadahMenu = document.getElementById('wadah-menu-utama');
+            wadahMenu.className = "menu-container " + (configApp.jumboMenu ? "menu-large" : "menu-medium");
+
+            document.getElementById('container-bar-cari').style.display = configApp.showSearch ? "block" : "none";
+        }
+
+        // FUNGSI BARU UNTUK MENGUBAH UKURAN FONT LAYAR WEB KASIR
+        function gantiUkuranFontWebLayars(valueBaru) {
+            configApp.fontSizeWeb = valueBaru;
+            localStorage.setItem('BJM_CONFIG_SYSTEM', JSON.stringify(configApp));
+            sinkronisasiTampilanUIBerdasarkanConfig();
+            tampilkanToast(`📱 Ukuran teks web diubah ke: ${valueBaru.toUpperCase()}`);
+        }
+
+        function gantiUkuranFontPrinter(valueBaru) {
+            configApp.fontSizePrinter = valueBaru;
+            localStorage.setItem('BJM_CONFIG_SYSTEM', JSON.stringify(configApp));
+            tampilkanToast(`📏 Font printer disetel ke: ${valueBaru.toUpperCase()}`);
+        }
+
+        function updateSettingOpsi(nomorSetting, valueBaru) {
+            if (configApp.clickSound) { try { window.navigator.vibrate(20); } catch(e){} }
+
+            switch(nomorSetting) {
+                case 1: configApp.lightTheme = valueBaru; break;
+                case 2: configApp.jumboMenu = valueBaru; break;
+                case 3: configApp.showSearch = valueBaru; break;
+                case 4: configApp.confirmClear = valueBaru; break;
+                case 5: configApp.clickSound = valueBaru; break;
+                case 7: configApp.autoDrawer = valueBaru; break;
+                case 8: configApp.printHeader = valueBaru; break;
+                case 9: configApp.printFooter = valueBaru; break;
+                case 10: configApp.currencySymbol = valueBaru; break;
+                case 11: configApp.textFooterVal = valueBaru; break;
+                case 12: configApp.boldQty = valueBaru; break;
+                case 13: configApp.ecoPrint = valueBaru; break;
+                case 14: configApp.lockDeleteRekap = valueBaru; break;
+            }
+            localStorage.setItem('BJM_CONFIG_SYSTEM', JSON.stringify(configApp));
+            sinkronisasiTampilanUIBerdasarkanConfig();
+            hitungUlangTotal();
+        }
+
+        function prosesLoginAdminUI() {
+            let passInput = document.getElementById('input-pass-login').value;
+            if (passInput === configApp.passwordAdmin) {
+                isAdminLoggedIn = true;
+                document.getElementById('input-pass-login').value = '';
+                tampilkanToast("🔓 Akses Mode Admin Terbuka!");
+                evaluasiStatusLoginAdminUI();
+            } else {
+                tampilkanToast("❌ Password Salah bray!");
+            }
+        }
+
+        function prosesLogoutAdminUI() {
+            isAdminLoggedIn = false;
+            tampilkanToast("🔒 Mode Admin Terkunci Kembali.");
+            evaluasiStatusLoginAdminUI();
+        }
+
+        function prosesGantiPasswordUI() {
+            let passBaru = document.getElementById('input-pass-baru-ui').value.trim();
+            if (passBaru.length < 4) {
+                tampilkanToast("⚠️ Password minimal 4 karakter bray!");
+                return;
+            }
+            configApp.passwordAdmin = passBaru;
+            localStorage.setItem('BJM_CONFIG_SYSTEM', JSON.stringify(configApp));
+            document.getElementById('input-pass-baru-ui').value = '';
+            tampilkanToast("✅ Password Berhasil Diubah!");
+        }
+
+        function prosesResetPabrikUI() {
+            let konfirm1 = confirm("Apakah kamu beneran ingin mereset total seluruh isi aplikasi ke pengaturan pabrik?");
+            if (konfirm1) {
+                localStorage.clear();
+                tampilkanToast("🔄 Aplikasi Ter-reset! Me-refresh halaman...");
+                setTimeout(() => { window.location.reload(); }, 1500);
+            }
+        }
+
+        function evaluasiStatusLoginAdminUI() {
+            const areaAdmin = document.getElementById('area-rahasia-admin');
+            const formLogin = document.getElementById('form-login-admin-box');
+            const formLogout = document.getElementById('form-logout-admin-box');
+            const grupSettingAdmin = document.getElementById('grup-setting-khusus-admin-saja');
+
+            if (isAdminLoggedIn) {
+                areaAdmin.classList.add('aktif');
+                formLogin.style.display = "none";
+                formLogout.style.display = "block";
+                grupSettingAdmin.style.opacity = "1";
+                grupSettingAdmin.style.pointerEvents = "auto";
+            } else {
+                areaAdmin.classList.remove('aktif');
+                formLogin.style.display = "block";
+                formLogout.style.display = "none";
+                grupSettingAdmin.style.opacity = "0.4";
+                grupSettingAdmin.style.pointerEvents = "none";
+            }
+        }
+
+        function bukaPanelSetting() { 
+            document.getElementById('panel-setting-admin').classList.add('active'); 
+            evaluasiStatusLoginAdminUI(); 
+        }
+        
+        function tutupPanelSetting() { 
+            document.getElementById('panel-setting-admin').classList.remove('active'); 
         }
 
         function renderMenuUtama(arrayData) {
             let wadah = document.getElementById('wadah-menu-utama');
             wadah.innerHTML = '';
             if(arrayData.length === 0) {
-                wadah.innerHTML = '<span style="color:#666; font-size:14px; margin-top:10px;">Menu tidak ditemukan...</span>';
+                wadah.innerHTML = '<span style="color:#666; font-size:0.9em; margin-top:10px;">Menu tidak ditemukan...</span>';
                 return;
             }
             arrayData.forEach(item => {
                 wadah.innerHTML += `
                     <button class="btn-barang" onclick="tambahKeKeranjang('${item.nama}', ${item.harga})">
-                        <span> ${item.nama}</span>
-                        <span class="badge-harga">${item.harga.toLocaleString('id-ID')}</span>
+                        <span>🍢 ${item.nama}</span>
+                        <span class="badge-harga">${configApp.currencySymbol} ${item.harga.toLocaleString('id-ID')}</span>
                     </button>
                 `;
             });
@@ -266,7 +630,7 @@
                     <div class="crud-item-row">
                         <div class="crud-item-info">
                             <span class="crud-item-nama">${item.nama}</span>
-                            <span class="crud-item-harga">Rp ${item.harga.toLocaleString('id-ID')}</span>
+                            <span class="crud-item-harga">${configApp.currencySymbol} ${item.harga.toLocaleString('id-ID')}</span>
                         </div>
                         <button class="btn-hapus-item" onclick="hapusMenuDariAplikasi(${index})">❌ Hapus</button>
                     </div>
@@ -279,7 +643,7 @@
             let harga = parseInt(document.getElementById('input-harga-menu').value);
 
             if (!nama || isNaN(harga) || harga <= 0) {
-                alert("Isi nama menu dan harga yang bener ya, Gilby!");
+                tampilkanToast("Isi nama menu and harga yang bener ya!");
                 return;
             }
 
@@ -288,21 +652,18 @@
             document.getElementById('input-nama-menu').value = '';
             document.getElementById('input-harga-menu').value = '';
             muatDataMenuAplikasi();
-            document.getElementById('cari-makanan').value = ''; 
-            alert(`Mantap! Menu "${nama}" sukses terdaftar.`);
+            tampilkanToast(`Menu "${nama}" sukses terdaftar.`);
         }
 
         function hapusMenuDariAplikasi(index) {
-            let konfirmasi = confirm(`Gilby yakin mau menghapus menu "${databaseMenu[index].nama}"?`);
+            let konfirmasi = confirm(`Yakin mau menghapus menu "${databaseMenu[index].nama}"?`);
             if (konfirmasi) {
                 databaseMenu.splice(index, 1);
                 localStorage.setItem('BJM_MENU_DATA', JSON.stringify(databaseMenu));
                 muatDataMenuAplikasi();
-                document.getElementById('cari-makanan').value = '';
             }
         }
 
-        // CATAT REKAP STRUK DETAIL
         function catatPemasukanHarian(nominal, listKeranjangItem) {
             if (nominal <= 0) return;
             let hariIni = new Date().toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -311,76 +672,72 @@
             let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN_V2');
             let rekapPemasukan = dataRekapLokal ? JSON.parse(dataRekapLokal) : {};
 
-            // Migrasi dari data versi 1 lama (angka doang) ke versi baru (objek berstruktur)
-            let dataLamaV1 = localStorage.getItem('BJM_REKAP_PEMASUKAN');
-            if (dataLamaV1 && !dataRekapLokal) {
-                let rekapLama = JSON.parse(dataLamaV1);
-                Object.keys(rekapLama).forEach(tgl => {
-                    rekapPemasukan[tgl] = {
-                        total: rekapLama[tgl],
-                        struks: [{ jam: "00:00", nominal: rekapLama[tgl], rincian: "Data rekap bawaan sebelum update" }]
-                    };
-                });
-                localStorage.removeItem('BJM_REKAP_PEMASUKAN');
-            }
-
             if (!rekapPemasukan[hariIni]) {
                 rekapPemasukan[hariIni] = { total: 0, struks: [] };
             }
 
-            // Gabungkan rincian item jadi teks ringkas
             let rincianTeks = listKeranjangItem.map(i => `${i.qty}x ${i.nama}`).join(', ');
 
             rekapPemasukan[hariIni].struks.push({
-                id: Date.now(), // ID unik buat gampang hapus satuan
+                id: Date.now(),
+                timestamp: Date.now(),
                 jam: jamSekarang,
                 nominal: nominal,
                 rincian: rincianTeks
             });
 
-            // Hitung total akumulasi hari ini
             rekapPemasukan[hariIni].total = rekapPemasukan[hariIni].struks.reduce((sum, item) => sum + item.nominal, 0);
-
             localStorage.setItem('BJM_REKAP_PEMASUKAN_V2', JSON.stringify(rekapPemasukan));
             tampilkanRekapPemasukan();
         }
 
-        // TAMPILKAN REKAP HARIAN DENGAN DETAIL PANAH DROPDOWN
+        function hitungKalkulasiSummary(rekapObj) {
+            let totalMingguan = 0;
+            let totalBulanan = 0;
+            let sekarang = Date.now();
+            let satuMingguMili = 7 * 24 * 60 * 60 * 1000;
+
+            let bulanSekarang = new Date().getMonth();
+            let tahunSekarang = new Date().getFullYear();
+
+            Object.keys(rekapObj).forEach(tanggal => {
+                let listStruk = rekapObj[tanggal].struks || [];
+                listStruk.forEach(s => {
+                    let tglStruk = s.timestamp || s.id || sekarang;
+
+                    if (sekarang - tglStruk <= satuMingguMili) {
+                        totalMingguan += s.nominal;
+                    }
+
+                    let d = new Date(tglStruk);
+                    if (d.getMonth() === bulanSekarang && d.getFullYear() === tahunSekarang) {
+                        totalBulanan += s.nominal;
+                    }
+                });
+            });
+
+            document.getElementById('summary-mingguan').innerText = configApp.currencySymbol + ' ' + totalMingguan.toLocaleString('id-ID');
+            document.getElementById('summary-bulanan').innerText = configApp.currencySymbol + ' ' + totalBulanan.toLocaleString('id-ID');
+        }
+
         function tampilkanRekapPemasukan() {
             let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN_V2');
-            
-            // Cek jika data V2 belum ada tapi ada data V1 lama untuk dimigrasi langsung saat load
-            if (!dataRekapLokal) {
-                let dataLamaV1 = localStorage.getItem('BJM_REKAP_PEMASUKAN');
-                if (dataLamaV1) {
-                    let rekapPemasukan = {};
-                    let rekapLama = JSON.parse(dataLamaV1);
-                    Object.keys(rekapLama).forEach(tgl => {
-                        rekapPemasukan[tgl] = {
-                            total: rekapLama[tgl],
-                            struks: [{ id: Date.now(), jam: "Tadi Pagi", nominal: rekapLama[tgl], rincian: "Menu Terjual" }]
-                        };
-                    });
-                    localStorage.setItem('BJM_REKAP_PEMASUKAN_V2', JSON.stringify(rekapPemasukan));
-                    localStorage.removeItem('BJM_REKAP_PEMASUKAN');
-                    dataRekapLokal = JSON.stringify(rekapPemasukan);
-                }
-            }
-
             let wadah = document.getElementById('list-pemasukan-harian');
             if (!dataRekapLokal || dataRekapLokal === '{}') {
-                wadah.innerHTML = '<span style="color: #666; font-size: 13px;">Belum ada data pemasukan tercatat...</span>';
+                wadah.innerHTML = '<span style="color: #666; font-size: 0.85em;">Belum ada data pemasukan tercatat...</span>';
+                document.getElementById('summary-mingguan').innerText = configApp.currencySymbol + ' 0';
+                document.getElementById('summary-bulanan').innerText = configApp.currencySymbol + ' 0';
                 return;
             }
 
             let rekap = JSON.parse(dataRekapLokal);
+            hitungKalkulasiSummary(rekap);
             wadah.innerHTML = '';
             
             Object.keys(rekap).reverse().forEach((tanggal, idx) => {
                 let totalDuit = rekap[tanggal].total;
                 let listStruk = rekap[tanggal].struks || [];
                 
-                // Siapkan teks copas gabungan untuk hari ini
                 let teksKlip = `Rekap Warung BJM\nTanggal: ${tanggal}\nTotal Pemasukan: Rp ${totalDuit.toLocaleString('id-ID')}\n\nRincian Transaksi:\n`;
                 listStruk.forEach(s => {
                     teksKlip += `- [${s.jam}] Rp ${s.nominal.toLocaleString('id-ID')} (${s.rincian})\n`;
@@ -392,24 +749,20 @@
                         <div class="struk-item-row">
                             <div class="struk-info">
                                 <span class="struk-jam">⏰ Jam ${struk.jam}</span>
-                                <b>Rp ${struk.nominal.toLocaleString('id-ID')}</b>
-                                <p class="struk-items-list">${struk.rincian}</p>
+                                <b>${configApp.currencySymbol} ${struk.nominal.toLocaleString('id-ID')}</b>
+                                <p class="struk-items-list" style="margin:2px 0 0 0; font-size:0.9em; color:#bbb;">${struk.rincian}</p>
                             </div>
-                            <button class="btn-hapus-struk-tunggal" onclick="hapusStrukTunggal('${tanggal}', ${sIdx})">❌ Hapus</button>
+                            <button class="btn-hapus-struk-tunggal" ${configApp.lockDeleteRekap ? 'disabled style="opacity:0.3; pointer-events:none;" font-size:0.8em;' : 'font-size:0.8em;'} onclick="hapusStrukTunggal('${tanggal}', ${sIdx})">❌ Hapus</button>
                         </div>
                     `;
                 });
-
-                if(listStruk.length === 0) {
-                    strukRowsHtml = `<span style="color:#777; font-size:12px; display:block; padding: 5px 0;">Tidak ada list transaksi aktif...</span>`;
-                }
 
                 wadah.innerHTML += `
                     <div class="rekap-tanggal-item">
                         <div class="rekap-header-click" onclick="toggleDropdownRekap(${idx})">
                             <div class="rekap-info-utama">
                                 <b>📅 ${tanggal}</b><br>
-                                <span style="font-size:13px; color:#00f2fe; font-weight:bold;">Total: Rp ${totalDuit.toLocaleString('id-ID')}</span>
+                                <span style="font-size:0.9em; color:#00f2fe; font-weight:bold;">Total: ${configApp.currencySymbol} ${totalDuit.toLocaleString('id-ID')}</span>
                             </div>
                             <span class="rekap-panah" id="panah-rekap-${idx}">▼</span>
                         </div>
@@ -418,9 +771,9 @@
                             <div style="max-height: 200px; overflow-y:auto; padding-right:5px;">
                                 ${strukRowsHtml}
                             </div>
-                            <div class="rekap-tombol-bawah-grup">
-                                <button class="btn-copas-rekap" onclick="copasTeksRekap('${btoa(teksKlip)}')">📋 Copas Rekap</button>
-                                <button class="btn-hapus-rekap-total" onclick="hapusRekapHarianTotal('${tanggal}')">🗑️ Hapus Total Hari Ini</button>
+                            <div class="rekap-tombol-bawah-grup" style="margin-top:10px; display:flex; gap:5px;">
+                                <button class="btn-copas-rekap" style="flex:1; padding:6px; font-size:0.85em;" onclick="copasTeksRekap('${btoa(teksKlip)}')">📋 Copas Rekap</button>
+                                <button class="btn-danger-ui" style="flex:1; padding:6px; font-size:0.85em;" onclick="hapusRekapHarianTotal('${tanggal}')">🗑️ Hapus Total Hari Ini</button>
                             </div>
                         </div>
                     </div>
@@ -428,7 +781,6 @@
             });
         }
 
-        // FUNGSI ANIMASI PANAH DROPDOWN
         function toggleDropdownRekap(idx) {
             let drop = document.getElementById(`drop-rekap-${idx}`);
             let panah = document.getElementById(`panah-rekap-${idx}`);
@@ -444,154 +796,139 @@
         function copasTeksRekap(base64Teks) {
             let teksAsli = atob(base64Teks);
             navigator.clipboard.writeText(teksAsli).then(() => {
-                alert("📋 Rekap harian & detail struk sukses disalin ke memori HP Mama!");
-            }).catch(() => {
-                alert("Gagal menyalin otomatis bray!");
+                tampilkanToast("📋 Rekap harian sukses disalin!");
             });
         }
 
-        // 1. HAPUS STRUK TUNGGAL (YANG SALAH INPUT SAJA)
         function hapusStrukTunggal(tanggal, sIdx) {
             let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN_V2');
             if (!dataRekapLokal) return;
-
             let rekap = JSON.parse(dataRekapLokal);
-            let targetStruk = rekap[tanggal].struks[sIdx];
-
-            let yakin = confirm(`Ma, yakin mau menghapus satu transaksi senilai Rp ${targetStruk.nominal.toLocaleString('id-ID')} pada jam ${targetStruk.jam}?`);
-            if (yakin) {
-                // Potong item terpilih
+            
+            if(confirm("Hapus satu data struk ini dari rekap?")) {
                 rekap[tanggal].struks.splice(sIdx, 1);
-                // Hitung ulang total harian setelah dikurangi struk tersebut
                 rekap[tanggal].total = rekap[tanggal].struks.reduce((sum, item) => sum + item.nominal, 0);
-
                 localStorage.setItem('BJM_REKAP_PEMASUKAN_V2', JSON.stringify(rekap));
                 tampilkanRekapPemasukan();
+                tampilkanToast("Satu data struk berhasil dihapus.");
             }
         }
 
-        // 2. HAPUS KESELURUHAN HARI (MUNCUL POP UP VALIDASI KETAT)
         function hapusRekapHarianTotal(tanggal) {
-            // Pop up 1: Mencegah ketidaksengajaan
-            let yakin1 = confirm(`⚠️ PERINGATAN KERAS! ⚠️\n\nMa, apakah Mama beneran yakin mau menghapus SELURUH data rekap pemasukan pada tanggal ${tanggal}?\nSemua list struk di hari ini akan hilang selamanya.`);
-            
-            if (yakin1) {
-                // Pop up 2: Mencegah salah pencet kedua kalinya
-                let yakin2 = confirm(`Konfirmasi Sekali Lagi:\nBenar-benar mau dikosongkan total untuk tanggal ${tanggal}? (Klik OK jika setuju)`);
-                
-                if (yakin2) {
-                    let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN_V2');
-                    if (dataRekapLokal) {
-                        let rekap = JSON.parse(dataRekapLokal);
-                        delete rekap[tanggal]; 
-                        localStorage.setItem('BJM_REKAP_PEMASUKAN_V2', JSON.stringify(rekap));
-                        tampilkanRekapPemasukan();
-                        alert(`Data rekap tanggal ${tanggal} sudah bersih total.`);
-                    }
-                }
+            if(confirm(`Hapus seluruh rekap tanggal ${tanggal}?`)) {
+                let dataRekapLokal = localStorage.getItem('BJM_REKAP_PEMASUKAN_V2');
+                let rekap = JSON.parse(dataRekapLokal);
+                delete rekap[tanggal]; 
+                localStorage.setItem('BJM_REKAP_PEMASUKAN_V2', JSON.stringify(rekap));
+                tampilkanRekapPemasukan();
+                tampilkanToast(`Data harian ${tanggal} dibersihkan.`);
             }
         }
-
-        function bukaPanelSetting() { document.getElementById('panel-setting-admin').classList.add('active'); }
-        function tutupPanelSetting() { document.getElementById('panel-setting-admin').classList.remove('active'); }
 
         function kosongkanKeranjangSemua() {
             if(keranjang.length === 0) return;
-            let yakin = confirm("Ma, yakin mau hapus/kosongkan seluruh isi keranjang belanja?");
-            if(yakin) {
-                keranjang = [];
-                hitungUlangTotal();
+            if(configApp.confirmClear) {
+                if(!confirm("Kosongkan isi keranjang?")) return;
             }
+            keranjang = [];
+            hitungUlangTotal();
+            tampilkanToast("Keranjang dikosongkan.");
         }
 
-        // KONEKSI BLUETOOTH DIRECT
         async function hubungkanPrinterDirect() {
             try {
                 const device = await navigator.bluetooth.requestDevice({
                     filters: [{ name: 'RPPO2N' }],
                     optionalServices: ['00001101-0000-1000-8000-00805f9b34fb', '0000ff00-0000-1000-8000-00805f9b34fb'] 
                 });
-
                 const btn = document.getElementById('btn-connect');
                 btn.innerText = "⏳ Sedang Menyambungkan...";
-
                 const server = await device.gatt.connect();
                 const services = await server.getPrimaryServices();
                 let targetService = services[0]; 
-                
                 const characteristics = await targetService.getCharacteristics();
                 printerCharacteristic = characteristics.find(c => c.properties.write || c.properties.writeWithoutResponse);
 
                 if (printerCharacteristic) {
                     btn.innerText = "✅ PRINTER RPPO2N TERSAMBUNG!";
                     btn.className = "btn-bluetooth connected";
-                    alert("Printer RPPO2N Berhasil Tersambung Tanpa Jembatan! Suksma!");
+                    tampilkanToast("Printer RPPO2N Terhubung Sempurna!");
                 }
             } catch (error) {
-                console.error(error);
-                document.getElementById('btn-connect').innerText = "❌ GAGAL KONEK, COBA LAGI";
-                alert("Gagal terhubung: " + error.message);
+                tampilkanToast("Gagal terhubung bluetooth.");
             }
         }
 
-        // TES STRUK UNTUK MEMASTIKAN PRINTER AMAN
-        async function jalankanTesStruk() {
+        async function bukaLaciKasirManual() {
+            if (configApp.clickSound) { try { window.navigator.vibrate(30); } catch(e){} }
+            
             if (!printerCharacteristic) {
-                alert('⚠️ Sambungkan Bluetooth ke printer RPPO2N dulu Ma, baru bisa tes print!');
+                tampilkanToast('⚠️ Sambungkan Bluetooth ke Printer dulu Ma!');
                 return;
             }
+            try {
+                const commandBukaDrawer = new Uint8Array([27, 112, 0, 25, 250]);
+                await printerCharacteristic.writeValueWithoutResponse(commandBukaDrawer);
+                tampilkanToast("🔓 Laci Kasir Terbuka!");
+            } catch(e) {
+                tampilkanToast("Gagal memicu laci kasir bray!");
+            }
+        }
 
-            let teksTes = "";
-            teksTes += "================================\n";
-            teksTes += "        TES PRINTER BJM         \n";
-            teksTes += "================================\n";
-            teksTes += "STATUS  : KONEKSI OK (DIRECT)\n";
-            teksTes += `WAKTU   : ${new Date().toLocaleTimeString('id-ID')}\n`;
-            teksTes += "FITUR   : ANTI-JEMBATAN LANCAR\n";
-            teksTes += "--------------------------------\n";
-            teksTes += "     PRINTER SIAP JUALAN!       \n";
-            teksTes += "\n\n\n\n";
+        function getFontBytesCommand() {
+            if (configApp.fontSizePrinter === "medium") {
+                return new Uint8Array([29, 33, 16]); 
+            } else if (configApp.fontSizePrinter === "large") {
+                return new Uint8Array([29, 33, 17]); 
+            }
+            return new Uint8Array([29, 33, 0]); 
+        }
 
+        async function jalankanTesStruk() {
+            if (!printerCharacteristic) {
+                tampilkanToast('⚠️ Sambungkan Bluetooth dulu Ma!');
+                return;
+            }
+            
+            const initPrinter = new Uint8Array([27, 64]); 
+            const fontSetting = getFontBytesCommand();
+
+            let teksTes = "================================\n"
+                        + "        TES PRINTER BJM         \n"
+                        + "================================\n"
+                        + `UKURAN  : ${configApp.fontSizePrinter.toUpperCase()}\n`
+                        + "STATUS  : KONEKSI DIRECT OK\n"
+                        + "--------------------------------\n\n\n\n";
             try {
                 const encoder = new TextEncoder();
                 const dataBiner = encoder.encode(teksTes);
-                const ukuranMaksimalPaket = 20; 
-                for (let i = 0; i < dataBiner.length; i += ukuranMaksimalPaket) {
-                    const paketKecil = dataBiner.slice(i, i + ukuranMaksimalPaket);
-                    await printerCharacteristic.writeValue(paketKecil);
+                
+                await printerCharacteristic.writeValueWithoutResponse(initPrinter);
+                await printerCharacteristic.writeValueWithoutResponse(fontSetting);
+
+                const chunk = 20; 
+                for (let i = 0; i < dataBiner.length; i += chunk) {
+                    await printerCharacteristic.writeValueWithoutResponse(dataBiner.slice(i, i + chunk));
                 }
-                console.log("Tes struk berhasil!");
             } catch (error) {
-                console.error(error);
-                alert("Gagal tes print ma! Coba koneksikan ulang bluetooth-nya.");
+                tampilkanToast("Gagal Cetak!");
             }
         }
 
-        // SISTEM KERANJANG
         function tambahKeKeranjang(nama, harga) {
+            if (configApp.clickSound) { try { window.navigator.vibrate(15); } catch(e){} }
             let item = keranjang.find(i => i.nama === nama);
-            if (item) {
-                item.qty += 1;
-            } else {
-                keranjang.push({ nama: nama, harga: harga, qty: 1 });
-            }
+            if (item) { item.qty += 1; } 
+            else { keranjang.push({ nama: nama, harga: harga, qty: 1 }); }
             hitungUlangTotal();
         }
 
         function ubahQty(index, aksiAtauValue) {
-            if (aksiAtauValue === '+') {
-                keranjang[index].qty += 1;
-            } else if (aksiAtauValue === '-') {
-                if (keranjang[index].qty > 1) {
-                    keranjang[index].qty -= 1;
-                }
-            } else {
+            if (aksiAtauValue === '+') { keranjang[index].qty += 1; } 
+            else if (aksiAtauValue === '-') { if (keranjang[index].qty > 1) keranjang[index].qty -= 1; } 
+            else {
                 let val = parseInt(aksiAtauValue);
-                if (!isNaN(val) && val > 0) {
-                    keranjang[index].qty = val;
-                } else {
-                    keranjang[index].qty = 1;
-                }
+                keranjang[index].qty = (!isNaN(val) && val > 0) ? val : 1;
             }
             hitungUlangTotal();
         }
@@ -601,8 +938,8 @@
             let layarKeranjang = document.getElementById('list-keranjang-layar');
             
             if(keranjang.length === 0) {
-                layarKeranjang.innerHTML = `<span style="color: #666; font-size: 13px;">Belum ada menu yang dipilih...</span>`;
-                document.getElementById('total-layar').innerText = 'Rp 0';
+                layarKeranjang.innerHTML = `<span style="color: #666; font-size: 0.85em;">Belum ada menu yang dipilih...</span>`;
+                document.getElementById('total-layar').innerText = configApp.currencySymbol + ' 0';
                 return;
             }
 
@@ -611,6 +948,8 @@
                 let subtotal = item.harga * item.qty;
                 totalHarga += subtotal;
                 
+                let qtyDisplay = configApp.boldQty ? `<b>${item.qty}</b>` : `${item.qty}`;
+
                 layarKeranjang.innerHTML += `
                     <div class="item-row item-keranjang-layar">
                         <span>🍢 <b>${item.nama}</b></span>
@@ -618,14 +957,13 @@
                             <button class="btn-qty" onclick="ubahQty(${index}, '-')">-</button>
                             <input type="number" class="input-qty" value="${item.qty}" onchange="ubahQty(${index}, this.value)" onclick="this.select()">
                             <button class="btn-qty" onclick="ubahQty(${index}, '+')">+</button>
-                            <span style="color:#d4af37; margin: 0 5px 0 10px; font-weight:bold; min-width:70px; text-align:right;">Rp ${subtotal.toLocaleString('id-ID')}</span>
+                            <span style="color:#d4af37; margin: 0 5px 0 10px; font-weight:bold; min-width:70px; text-align:right;">${configApp.currencySymbol} ${subtotal.toLocaleString('id-ID')}</span>
                             <button class="btn-hapus-item" onclick="hapusPesanan(${index})">❌</button>
                         </div>
                     </div>
                 `;
             });
-
-            document.getElementById('total-layar').innerText = 'Rp ' + totalHarga.toLocaleString('id-ID');
+            document.getElementById('total-layar').innerText = configApp.currencySymbol + ' ' + totalHarga.toLocaleString('id-ID');
         }
 
         function hapusPesanan(index) {
@@ -633,62 +971,86 @@
             hitungUlangTotal();
         }
 
-        // PRINT UTAMA
         async function siapkanDanPrint() {
             if (keranjang.length === 0) {
-                alert('Keranjang masih kosong, Gilby!');
+                tampilkanToast('Keranjang masih kosong bray!');
+                return;
+            }
+            if (!printerCharacteristic) {
+                tampilkanToast('⚠️ Hubungkan Printer dulu Ma!');
                 return;
             }
 
-            if (!printerCharacteristic) {
-                alert('⚠️ Hubungkan Printer dulu di halaman Pengaturan (klik ikon ⚙️ di pojok kanan atas).');
-                return;
+            if (configApp.autoDrawer) {
+                try { 
+                    const commandBukaDrawer = new Uint8Array([27, 112, 0, 25, 250]);
+                    await printerCharacteristic.writeValueWithoutResponse(commandBukaDrawer); 
+                } catch(e) {}
             }
+
+            let maxChar = (configApp.fontSizePrinter === "large") ? 16 : 32;
+            let garisPembatas = "-".repeat(maxChar);
+            let samaDenganPembatas = "=".repeat(maxChar);
 
             let teksStruk = "";
-            teksStruk += "          WARUNG BJM          \n";
-            teksStruk += "    Kuliner Khas Karangasem   \n";
-            teksStruk += "================================\n";
-            teksStruk += `Tgl: ${new Date().toLocaleDateString('id-ID')} ${new Date().toLocaleTimeString('id-ID')}\n`;
-            teksStruk += "--------------------------------\n";
+            
+            if (configApp.printHeader) {
+                teksStruk += (maxChar === 16) ? "   WARUNG BJM   \n" : "          WARUNG BJM          \n";
+                teksStruk += (maxChar === 16) ? " Khas K.asem \n" : "    Kuliner Khas Karangasem   \n";
+                teksStruk += samaDenganPembatas + "\n";
+            }
+            
+            teksStruk += `Tgl: ${new Date().toLocaleDateString('id-ID')}\nJam: ${new Date().toLocaleTimeString('id-ID')}\n`
+                      + garisPembatas + "\n";
             
             keranjang.forEach(item => {
                 let subtotal = item.harga * item.qty;
                 teksStruk += `${item.nama}\n`;
                 let rincianKiri = `  ${item.qty}x @${item.harga.toLocaleString('id-ID')}`;
-                let rincianKanan = `Rp ${subtotal.toLocaleString('id-ID')}`;
-                let sisaSpasi = 32 - (rincianKiri.length + rincianKanan.length);
-                if (sisaSpasi < 1) sisaSpasi = 1;
-                teksStruk += rincianKiri + " ".repeat(sisaSpasi) + rincianKanan + "\n";
+                let rincianRanan = `${configApp.currencySymbol} ${subtotal.toLocaleString('id-ID')}`;
+                
+                let sisaSpasi = maxChar - (rincianKiri.length + rincianRanan.length);
+                teksStruk += rincianKiri + " ".repeat(sisaSpasi < 1 ? 1 : sisaSpasi) + rincianRanan + "\n";
+                
+                if (!configApp.ecoPrint) { teksStruk += "\n"; }
             });
 
-            teksStruk += "--------------------------------\n";
-            let totalTeks = `TOTAL NYA: Rp ${totalHarga.toLocaleString('id-ID')}`;
-            teksStruk += " ".repeat(32 - totalTeks.length) + totalTeks + "\n";
-            teksStruk += "================================\n";
-            teksStruk += "          Matur Suksma!         \n";
-            teksStruk += "    Semoga Hari Anda Cerah!     \n";
+            teksStruk += garisPembatas + "\n";
+            let totalTeks = `TOTAL: ${configApp.currencySymbol} ${totalHarga.toLocaleString('id-ID')}`;
+            let spasiTotal = maxChar - totalTeks.length;
+            teksStruk += " ".repeat(spasiTotal < 0 ? 0 : spasiTotal) + totalTeks + "\n"
+                        + samaDenganPembatas + "\n";
+            
+            if (configApp.printFooter) {
+                teksStruk += (maxChar === 16) ? " Matur Suksma!  \n" : "          Matur Suksma!         \n";
+                teksStruk += `    ${configApp.textFooterVal}    \n`;
+            }
+            
             teksStruk += "\n\n\n\n"; 
 
             try {
                 const encoder = new TextEncoder();
                 const dataBiner = encoder.encode(teksStruk);
-                const ukuranMaksimalPaket = 20; 
-                for (let i = 0; i < dataBiner.length; i += ukuranMaksimalPaket) {
-                    const paketKecil = dataBiner.slice(i, i + ukuranMaksimalPaket);
-                    await printerCharacteristic.writeValue(paketKecil);
+                
+                const initPrinter = new Uint8Array([27, 64]);
+                const fontSetting = getFontBytesCommand();
+
+                await printerCharacteristic.writeValueWithoutResponse(initPrinter);
+                await printerCharacteristic.writeValueWithoutResponse(fontSetting);
+
+                const chunk = 20; 
+                for (let i = 0; i < dataBiner.length; i += chunk) {
+                    await printerCharacteristic.writeValueWithoutResponse(dataBiner.slice(i, i + chunk));
                 }
                 
-                // PANGGIL FUNGSI BARU (Mengirim total nominal & struktur keranjang saat ini)
                 catatPemasukanHarian(totalHarga, keranjang);
-
                 keranjang = [];
                 hitungUlangTotal();
                 document.getElementById('cari-makanan').value = ''; 
                 renderMenuUtama(databaseMenu);
+                tampilkanToast("📝 Struk Sukses Dicetak!");
             } catch (error) {
-                console.error(error);
-                alert("Gagal kirim data ke printer bray! Buka Pengaturan lalu sambungkan lagi.");
+                tampilkanToast("Gagal kirim data ke printer bray!");
             }
         }
 
